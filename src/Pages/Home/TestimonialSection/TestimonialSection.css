@@ -1,0 +1,14 @@
+.swiper-pagination-bullet {
+   background-color: white !important;
+   width: 10px !important;
+   height: 10px !important;
+   border-radius: 100% !important;
+   -webkit-border-radius: 100% !important;
+   -moz-border-radius: 100% !important;
+   -ms-border-radius: 100% !important;
+   -o-border-radius: 100% !important;
+}
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+   bottom: 0px !important;
+}

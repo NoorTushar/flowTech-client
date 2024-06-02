@@ -4,7 +4,8 @@ export default {
    theme: {
       extend: {
          fontFamily: {
-            poppins: '"Poppins", sans-serif',
+            oswald: '"Oswald", sans-serif',
+            didact: '"Didact Gothic", sans-serif',
          },
          colors: {
             ourAsh: "#888888", // Ash
