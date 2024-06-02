@@ -1,24 +1,23 @@
+import { useRef } from "react";
 import bg1 from "../../assets/a12-bg-1.jpg";
 import bg2 from "../../assets/a12-bg-2.jpg";
 import bg3 from "../../assets/a12-bg-3.jpg";
-
 import "./Banner.css";
-
-// import Swiper bundle with all modules installed
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// import styles bundle
 import "swiper/css";
 import "swiper/css/bundle";
-
-// import required modules
 import { Pagination, Navigation, Autoplay, EffectFade } from "swiper/modules";
 import Slide from "./Slide";
 
 const Banner = () => {
+   const swiperRef = useRef(null);
+
    return (
       <>
          <Swiper
+            onSwiper={(swiper) => {
+               swiperRef.current = swiper;
+            }}
             slidesPerView={1}
             spaceBetween={30}
             centeredSlides={true}
@@ -36,15 +35,15 @@ const Banner = () => {
             className="mySwiper"
          >
             <SwiperSlide>
-               <Slide bgImg={bg1}></Slide>
+               <Slide bgImg={bg1} swiperRef={swiperRef}></Slide>
             </SwiperSlide>
 
             <SwiperSlide>
-               <Slide bgImg={bg2}></Slide>
+               <Slide bgImg={bg2} swiperRef={swiperRef}></Slide>
             </SwiperSlide>
 
             <SwiperSlide>
-               <Slide bgImg={bg3}></Slide>
+               <Slide bgImg={bg3} swiperRef={swiperRef}></Slide>
             </SwiperSlide>
          </Swiper>
       </>

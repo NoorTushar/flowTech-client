@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import LinkButton from "../Shared/Button/LinkButton";
 
-const Slide = ({ bgImg }) => {
+const Slide = ({ bgImg, swiperRef }) => {
    return (
       <div
          className="hero min-h-[calc(100vh)]"
@@ -23,6 +23,20 @@ const Slide = ({ bgImg }) => {
                <div className="flex justify-start">
                   <LinkButton name={"our services"} width="160px"></LinkButton>
                </div>
+               <div className="custom-navigation">
+                  <button
+                     onClick={() => swiperRef.current?.slidePrev()}
+                     className="custom-prev"
+                  >
+                     Prev
+                  </button>
+                  <button
+                     onClick={() => swiperRef.current?.slideNext()}
+                     className="custom-next"
+                  >
+                     Next
+                  </button>
+               </div>
             </div>
          </div>
       </div>
@@ -31,6 +45,7 @@ const Slide = ({ bgImg }) => {
 
 Slide.propTypes = {
    bgImg: PropTypes.string.isRequired,
+   swiperRef: PropTypes.object.isRequired,
 };
 
 export default Slide;

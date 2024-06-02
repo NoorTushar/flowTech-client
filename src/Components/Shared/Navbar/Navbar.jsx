@@ -13,19 +13,13 @@ const NavBar = () => {
    const navItem = (
       <>
          <li>
-            <NavLink exact to={"/"}>
-               Home
-            </NavLink>
+            <NavLink to={"/"}>Home</NavLink>
          </li>
          <li>
-            <NavLink exact to={"/dashboard"}>
-               Dashboard
-            </NavLink>
+            <NavLink to={"/dashboard"}>Dashboard</NavLink>
          </li>
          <li>
-            <NavLink exact to={"/contact-us"}>
-               Contact Us
-            </NavLink>
+            <NavLink to={"/contact-us"}>Contact Us</NavLink>
          </li>
 
          {user?.email && (
