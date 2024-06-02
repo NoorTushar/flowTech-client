@@ -12,10 +12,10 @@ const Slide = ({ bgImg, swiperRef }) => {
          <div className="hero-overlay bg-opacity-80"></div>
          <div className="hero-content text-start ">
             <div className="max-w-3xl">
-               <h4 className="text-ourPrimary text-lg mb-2 tracking-widest uppercase font-medium">
+               <h4 className="text-ourPrimary text-lg mb-2 tracking-[5px] uppercase font-medium">
                   welcome to flowtech agency
                </h4>
-               <h1 className="mb-5 text-[50px] lg:text-[86px] text-white font-semibold text-ourOrange tracking-[3px] md:leading-[60px] uppercase">
+               <h1 className="mb-5 text-[56px] lg:text-[86px] text-white font-semibold text-ourOrange tracking-[3px] md:leading-[60px] uppercase">
                   digital agency
                   <br /> <span className="text-stroke">solutions</span>
                </h1>

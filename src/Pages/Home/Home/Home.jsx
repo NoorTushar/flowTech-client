@@ -1,5 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Banner from "../../../Components/Banner/Banner";
+import ServiceSection from "../../../Components/ServiceSection/ServiceSection";
+import VerticalSectionLine from "../../../Components/Shared/VerticalSectionLine/VerticalSectionLine";
 
 const Home = () => {
    return (
@@ -10,9 +12,12 @@ const Home = () => {
          {/* Banner Section */}
          <Banner />
          {/* About Us */}
-         <h2>About us</h2>
+
          {/* Services */}
-         <h2>Services</h2>
+         <section className="bg-ourBlack py-[60px] md:py-[100px] relative">
+            <ServiceSection />
+            <VerticalSectionLine />
+         </section>
       </div>
    );
 };
