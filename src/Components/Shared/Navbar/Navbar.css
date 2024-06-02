@@ -12,6 +12,7 @@ li .active {
    /* background-color: #f86244 !important; */
    color: #f86244 !important;
    background-color: transparent !important;
+   font-weight: 500;
 }
 
 li::before {
