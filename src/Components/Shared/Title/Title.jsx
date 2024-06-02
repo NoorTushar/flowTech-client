@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const Title = ({ suptitle, title, textAlign }) => {
    return (
-      <div className={`text-${textAlign || "start"} mb-12`}>
+      <div className={`text-${textAlign || "start"} mb-6 md:mb-12`}>
          <h4 className="text-[14px] tracking-[5px] text-ourPrimary uppercase mb-2">
             {suptitle}
          </h4>

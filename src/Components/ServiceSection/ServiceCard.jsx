@@ -19,10 +19,10 @@ const ServiceCard = ({ title, description, icon: Icon, index }) => {
 };
 
 ServiceCard.propTypes = {
-   title: PropTypes.string,
-   description: PropTypes.string,
-   icon: PropTypes.element,
-   index: PropTypes.number,
+   title: PropTypes.string.isRequired,
+   description: PropTypes.string.isRequired,
+   icon: PropTypes.elementType.isRequired,
+   index: PropTypes.number.isRequired,
 };
 
 export default ServiceCard;

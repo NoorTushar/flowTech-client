@@ -4,7 +4,7 @@ import ServiceCard from "./ServiceCard";
 
 const ServiceSection = () => {
    return (
-      <section className="relative max-w-[1170px] mx-auto w-[88%] md:w-[82%]">
+      <div className="relative max-w-[1170px] mx-auto w-[88%] md:w-[82%]">
          <Title suptitle={"what we do"} title={`services`} />
 
          {/* cards */}
@@ -19,7 +19,7 @@ const ServiceSection = () => {
                />
             ))}
          </div>
-      </section>
+      </div>
    );
 };
 
