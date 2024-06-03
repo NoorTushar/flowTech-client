@@ -3,12 +3,16 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAuth from "../../../Hooks/useAuth";
 
 const WorkSheet = () => {
    const [startDate, setStartDate] = useState(new Date());
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [formData, setFormData] = useState({});
-
+   const axiosSecure = useAxiosSecure();
+   const { user } = useAuth();
+   console.log(user);
    const handleAddWork = (e) => {
       e.preventDefault();
 
@@ -17,17 +21,25 @@ const WorkSheet = () => {
       const workHours = form.workHours.value;
       const workDate = form.workDate.value;
 
-      setFormData({ task, workHours, workDate });
+      setFormData({ task, workHours, workDate, employee: user.email });
 
       // Open the modal when the form is submitted
       setIsModalOpen(true);
    };
 
-   const confirmAddWork = () => {
+   const confirmAddWork = async () => {
       console.log(formData);
-
-      closeModal();
-      toast.success("WORK ADDED");
+      try {
+         const { data } = await axiosSecure.post("/works", formData);
+         console.log(data);
+         if (data.insertedId) {
+            toast.success("WORK ADDED");
+            closeModal();
+         }
+      } catch (error) {
+         toast.error(error.message);
+         closeModal();
+      }
    };
 
    const closeModal = () => {
