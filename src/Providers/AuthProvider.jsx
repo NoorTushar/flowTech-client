@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import {
    GoogleAuthProvider,
    createUserWithEmailAndPassword,
@@ -60,25 +60,25 @@ const AuthProvider = ({ children }) => {
       return signOut(auth);
    };
 
-   const saveUser = useCallback(
-      async (user) => {
-         const currentUser = {
-            email: user?.email,
-            role: "guest",
-            status: "Verified",
-         };
-         const { data } = await axiosPublic.put(`/users`, currentUser);
-         return data;
-      },
-      [axiosPublic]
-   );
+   // const saveUser = useCallback(
+   //    async (user) => {
+   //       const currentUser = {
+   //          email: user?.email,
+   //          role: "guest",
+   //          status: "Verified",
+   //       };
+   //       const { data } = await axiosPublic.put(`/users`, currentUser);
+   //       return data;
+   //    },
+   //    [axiosPublic]
+   // );
 
    useEffect(() => {
       const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
          setUser(currentUser);
          if (currentUser) {
             try {
-               await saveUser(currentUser);
+               // await saveUser(currentUser);
                const userInfo = { email: currentUser.email };
                const res = await axiosPublic.post("/jwt", userInfo);
                if (res.data.token) {
@@ -96,7 +96,7 @@ const AuthProvider = ({ children }) => {
       });
 
       return () => unSubscribe();
-   }, [saveUser, axiosPublic]);
+   }, [axiosPublic]);
 
    const authInfo = {
       user,

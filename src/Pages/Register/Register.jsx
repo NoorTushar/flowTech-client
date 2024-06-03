@@ -12,8 +12,10 @@ import { Helmet } from "react-helmet-async";
 import Title from "../../Components/Shared/Title/Title";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
+   const axiosPublic = useAxiosPublic();
    // toggle show/ hide password - (1)
    const [showPassword, setShowPassword] = useState(false);
 
@@ -36,6 +38,7 @@ const Register = () => {
    // React-Hook-Form: (2b)
    const onSubmit = async (data) => {
       console.log(data);
+
       //   Show confirmation dialog
       const confirmationResult = await Swal.fire({
          title: "Confirm?",
@@ -52,6 +55,8 @@ const Register = () => {
             await createUser(data.email, data.password);
             await updateUser(data.userName, data.photoURL);
 
+            const result = await axiosPublic.post("/users", data);
+            console.log(result.data);
             // have to set loading to false else after
             // redirecting to page, it will keep showing the loader
             setLoading(false);
@@ -67,7 +72,7 @@ const Register = () => {
             navigate(location?.state || "/");
          } catch (error) {
             console.log(error);
-            const errorMessage = error.message
+            const errorMessage = error?.message
                .split("Firebase: Error (auth/")[1]
                .split(")")[0]
                .replace(/-/g, " ");
@@ -90,6 +95,14 @@ const Register = () => {
       try {
          const result = await loginWithGoogle();
          console.log(result.user);
+
+         const userInfo = {
+            email: result.user.email,
+            userName: result.user.displayName,
+            role: "employee",
+         };
+
+         await axiosPublic.post("/users", userInfo);
 
          toast.success("LOGGED IN SUCCESSFULLY");
       } catch (error) {

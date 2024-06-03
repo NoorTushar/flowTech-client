@@ -11,8 +11,10 @@ import loginBg from "./a12-loginBg.jpg";
 import { Helmet } from "react-helmet-async";
 import Title from "../../Components/Shared/Title/Title";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Login = () => {
+   const axiosPublic = useAxiosPublic();
    // toggle show/ hide password - (1)
    const [showPassword, setShowPassword] = useState(false);
    const { loginWithGoogle, loginUser } = useAuth();
@@ -65,12 +67,16 @@ const Login = () => {
          const result = await loginWithGoogle();
          console.log(result.user);
 
-         toast.success("LOGGED IN SUCCESSFULLY");
+         const userInfo = {
+            email: result.user.email,
+            userName: result.user.displayName,
+            role: "employee",
+         };
 
-         // after login correct redirection (6)
-         navigate(location?.state || "/");
+         await axiosPublic.post("/users", userInfo);
+
+         toast.success("LOGGED IN SUCCESSFULLY");
       } catch (error) {
-         console.log(error);
          const errorMessage = error.message
             .split("Firebase: Error (auth/")[1]
             .split(")")[0]
