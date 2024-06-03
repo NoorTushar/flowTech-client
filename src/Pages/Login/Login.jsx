@@ -224,7 +224,7 @@ const Login = () => {
                   {/* // after registration correct redirection - (7) */}
                   <Link
                      state={locationState}
-                     to={"/registration"}
+                     to={"/register"}
                      className="text-xs text-center  uppercase  tracking-wider font-didact"
                   >
                      or <span className="text-ourPrimary ">register</span>{" "}

@@ -16,16 +16,13 @@ const NavBar = () => {
             <NavLink to={"/"}>Home</NavLink>
          </li>
          <li>
-            <NavLink to={"/dashboard"}>Dashboard</NavLink>
-         </li>
-         <li>
             <NavLink to={"/contact-us"}>Contact Us</NavLink>
          </li>
 
          {user?.email && (
             <>
                <li>
-                  <NavLink to={"/add-food"}>Add Food</NavLink>
+                  <NavLink to={"/dashboard"}>Dashboard</NavLink>
                </li>
             </>
          )}

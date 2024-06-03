@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import {
    GoogleAuthProvider,
    createUserWithEmailAndPassword,
@@ -60,31 +60,43 @@ const AuthProvider = ({ children }) => {
       return signOut(auth);
    };
 
-   // observe current user of firebase
+   const saveUser = useCallback(
+      async (user) => {
+         const currentUser = {
+            email: user?.email,
+            role: "guest",
+            status: "Verified",
+         };
+         const { data } = await axiosPublic.put(`/users`, currentUser);
+         return data;
+      },
+      [axiosPublic]
+   );
+
    useEffect(() => {
-      const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
          setUser(currentUser);
-         // console.log("Current User ----> ", currentUser);
          if (currentUser) {
-            // assign token for user
-            const userInfo = { email: currentUser.email };
-            axiosPublic.post("/jwt", userInfo).then((res) => {
+            try {
+               await saveUser(currentUser);
+               const userInfo = { email: currentUser.email };
+               const res = await axiosPublic.post("/jwt", userInfo);
                if (res.data.token) {
                   localStorage.setItem("access-token", res.data.token);
-                  setLoading(false);
                }
-            });
+            } catch (error) {
+               console.error("Error saving user or generating token:", error);
+            } finally {
+               setLoading(false);
+            }
          } else {
-            // remove token from client side if any
             localStorage.removeItem("access-token");
             setLoading(false);
          }
       });
 
-      return () => {
-         return unSubscribe();
-      };
-   }, [axiosPublic]);
+      return () => unSubscribe();
+   }, [saveUser, axiosPublic]);
 
    const authInfo = {
       user,
