@@ -5,6 +5,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../Layouts/DashboardLayout";
+import WorkSheet from "../Pages/Dashboard/WorkSheet/WorkSheet";
 
 export const router = createBrowserRouter([
    {
@@ -32,5 +33,11 @@ export const router = createBrowserRouter([
             <DashboardLayout />
          </PrivateRoute>
       ),
+      children: [
+         {
+            path: "work-sheet",
+            element: <WorkSheet />,
+         },
+      ],
    },
 ]);
