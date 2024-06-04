@@ -14,6 +14,9 @@ import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
+const image_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
 const Register = () => {
    const axiosPublic = useAxiosPublic();
    // toggle show/ hide password - (1)
@@ -37,64 +40,75 @@ const Register = () => {
 
    // React-Hook-Form: (2b)
    const onSubmit = async (data) => {
-      console.log(data);
+      const imageFile = { image: data.image[0] };
 
-      const userData = {
-         ...data,
-         verified: false,
-         // convert salary to integer before sending to backend
-         salary: parseInt(data.salary),
-         bankAC: parseInt(data.bankAC),
-      };
-      //   Show confirmation dialog
-      const confirmationResult = await Swal.fire({
-         title: "Confirm?",
-         text: "Have you put everything correctly?",
-         icon: "question",
-         showCancelButton: true,
-         confirmButtonText: "Yes, register my account",
-         cancelButtonText: "No, wait",
+      const res = await axiosPublic.post(image_hosting_api, imageFile, {
+         headers: {
+            "content-type": "multipart/form-data",
+         },
       });
 
-      console.log(userData);
+      if (res.data.success) {
+         const userData = {
+            ...data,
+            verified: false,
+            // convert salary to integer before sending to backend
+            salary: parseInt(data.salary),
+            bankAC: parseInt(data.bankAC),
+            image: res.data.data.display_url,
+         };
 
-      if (confirmationResult.isConfirmed) {
-         // create user imported from AuthContext
-         try {
-            await createUser(data.email, data.password);
-            await updateUser(data.userName, data.photoURL);
+         console.log(userData);
+         //   Show confirmation dialog
+         const confirmationResult = await Swal.fire({
+            title: "Confirm?",
+            text: "Have you put everything correctly?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Yes, register my account",
+            cancelButtonText: "No, wait",
+         });
 
-            const result = await axiosPublic.post("/people", userData);
-            console.log(result.data);
-            // have to set loading to false else after
-            // redirecting to page, it will keep showing the loader
-            setLoading(false);
-            reset();
-            Swal.fire({
-               title: "Success!",
-               text: "Registration Successful!",
-               icon: "success",
-               confirmButtonText: "Ok",
-            });
+         console.log(userData);
 
-            // navigate to private route or homepage
-            navigate(location?.state || "/");
-         } catch (error) {
-            console.log(error);
-            const errorMessage = error?.message
-               .split("Firebase: Error (auth/")[1]
-               .split(")")[0]
-               .replace(/-/g, " ");
+         if (confirmationResult.isConfirmed) {
+            // create user imported from AuthContext
+            try {
+               await createUser(data.email, data.password);
+               await updateUser(data.userName, res.data.data.display_url);
 
-            Swal.fire({
-               title: "Failure!",
-               text: `${errorMessage}`,
-               icon: "error",
-               width: 600,
-               color: "#A65F3F",
-               background: "",
-               confirmButtonText: "Ok",
-            });
+               const result = await axiosPublic.post("/people", userData);
+               console.log(result.data);
+               // have to set loading to false else after
+               // redirecting to page, it will keep showing the loader
+               setLoading(false);
+               reset();
+               Swal.fire({
+                  title: "Success!",
+                  text: "Registration Successful!",
+                  icon: "success",
+                  confirmButtonText: "Ok",
+               });
+
+               // navigate to private route or homepage
+               navigate(location?.state || "/");
+            } catch (error) {
+               console.log(error);
+               const errorMessage = error?.message
+                  .split("Firebase: Error (auth/")[1]
+                  .split(")")[0]
+                  .replace(/-/g, " ");
+
+               Swal.fire({
+                  title: "Failure!",
+                  text: `${errorMessage}`,
+                  icon: "error",
+                  width: 600,
+                  color: "#A65F3F",
+                  background: "",
+                  confirmButtonText: "Ok",
+               });
+            }
          }
       }
    };
@@ -107,7 +121,7 @@ const Register = () => {
 
          const userInfo = {
             email: result.user.email,
-            photoURL: result.user.photoURL,
+            image: result.user.image,
             userName: result.user.displayName,
             role: "employee",
             salary: 3000,
@@ -295,23 +309,23 @@ const Register = () => {
                      )}
                   </div>
 
-                  {/* photoURL field */}
+                  {/* image field */}
                   <div className="">
                      <input
                         // React-Hook-Form: (6)
-                        {...register("photoURL", {
+                        {...register("image", {
                            required: {
                               value: true,
-                              message: "Must provide a photoURL.",
+                              message: "Must provide an image.",
                            },
                         })}
                         className="w-full p-3 border-b border-ourAsh bg-ourLighterBlack outline-none duration-300 font-didact focus:border-ourPrimary placeholder:text-ourAsh text-white"
-                        type="text"
-                        placeholder="Photo URL"
+                        type="file"
+                        placeholder="Image"
                      />
-                     {errors?.photoURL && (
+                     {errors?.image && (
                         <span className="text-red-500 block mt-1 mb-2 font-didact">
-                           {errors.photoURL.message}
+                           {errors.image.message}
                         </span>
                      )}
                   </div>
