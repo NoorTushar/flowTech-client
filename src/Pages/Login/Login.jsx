@@ -76,6 +76,9 @@ const Login = () => {
          await axiosPublic.post("/employees", userInfo);
 
          toast.success("LOGGED IN SUCCESSFULLY");
+
+         // after login correct redirection
+         navigate(location?.state || "/");
       } catch (error) {
          const errorMessage = error.message
             .split("Firebase: Error (auth/")[1]
