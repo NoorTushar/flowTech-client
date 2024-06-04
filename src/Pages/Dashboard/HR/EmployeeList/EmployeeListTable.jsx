@@ -3,7 +3,7 @@ import { ImCross } from "react-icons/im";
 import { FaCircleCheck } from "react-icons/fa6";
 import LinkButton from "../../../../Components/Shared/Button/LinkButton";
 
-const EmployeeListTable = ({ employees, openModal }) => {
+const EmployeeListTable = ({ employees, openModal, openPayModal }) => {
    return (
       <div className="overflow-x-auto max-w-[800px] mx-auto my-10">
          <table className="table table-zebra">
@@ -34,7 +34,19 @@ const EmployeeListTable = ({ employees, openModal }) => {
                      </td>
                      <td>{employee?.bankAC}</td>
                      <td>{employee?.salary}</td>
-                     <td>PAY</td>
+                     <td>
+                        <button
+                           onClick={() => openPayModal(employee)}
+                           disabled={!employee.verified}
+                           className={`w-full px-5 py-2 ${
+                              employee.verified
+                                 ? "bg-ourPrimary text-white border-2 border-ourPrimary hover:bg-white hover:text-ourPrimary"
+                                 : "bg-gray-400 text-gray-700 cursor-not-allowed"
+                           } flex justify-center items-center duration-300 tracking-widest`}
+                        >
+                           PAY
+                        </button>
+                     </td>
                      <td>
                         <LinkButton name={"Details"} />
                      </td>
@@ -49,6 +61,7 @@ const EmployeeListTable = ({ employees, openModal }) => {
 EmployeeListTable.propTypes = {
    employees: PropTypes.array.isRequired,
    openModal: PropTypes.func.isRequired,
+   openPayModal: PropTypes.func.isRequired,
 };
 
 export default EmployeeListTable;
