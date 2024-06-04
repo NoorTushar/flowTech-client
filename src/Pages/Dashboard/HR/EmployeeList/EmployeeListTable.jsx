@@ -3,7 +3,7 @@ import { ImCross } from "react-icons/im";
 import { FaCircleCheck } from "react-icons/fa6";
 import LinkButton from "../../../../Components/Shared/Button/LinkButton";
 
-const EmployeeListTable = ({ employees }) => {
+const EmployeeListTable = ({ employees, handleVerification }) => {
    return (
       <div className="overflow-x-auto max-w-[800px] mx-auto  my-10">
          {/* <h2 className="text-center uppercase tracking-widest text-2xl mb-2">
@@ -27,13 +27,23 @@ const EmployeeListTable = ({ employees }) => {
                   <tr key={employee._id}>
                      <th>{index + 1}</th>
                      <td>{employee?.userName}</td>
-                     {employee?.status === "Verified" ? (
+                     {employee?.verified == true ? (
                         <td>
-                           <FaCircleCheck className="text-green-500 text-lg" />
+                           <button
+                              onClick={() =>
+                                 handleVerification(false, employee)
+                              }
+                           >
+                              <FaCircleCheck className="text-green-500 text-lg" />
+                           </button>
                         </td>
                      ) : (
                         <td>
-                           <ImCross className="text-ourPrimary" />
+                           <button
+                              onClick={() => handleVerification(true, employee)}
+                           >
+                              <ImCross className="text-ourPrimary" />
+                           </button>
                         </td>
                      )}
                      <td>{employee?.bankAC}</td>
@@ -52,6 +62,7 @@ const EmployeeListTable = ({ employees }) => {
 
 EmployeeListTable.propTypes = {
    employees: PropTypes.array.isRequired,
+   handleVerification: PropTypes.func.isRequired,
 };
 
 export default EmployeeListTable;
