@@ -23,7 +23,7 @@ const WorkSheet = () => {
 
       const form = e.target;
       const task = form.task.value;
-      const workHours = form.workHours.value;
+      const workHours = parseInt(form.workHours.value);
       const workDate = startDate.toISOString();
 
       setFormData({ task, workHours, workDate, employee: user.email });
