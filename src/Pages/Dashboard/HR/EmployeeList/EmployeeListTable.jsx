@@ -48,7 +48,10 @@ const EmployeeListTable = ({ employees, openModal, openPayModal }) => {
                         </button>
                      </td>
                      <td>
-                        <LinkButton name={"Details"} />
+                        <LinkButton
+                           name={"Details"}
+                           to={`/dashboard/details/${employee.email}`}
+                        />
                      </td>
                   </tr>
                ))}
