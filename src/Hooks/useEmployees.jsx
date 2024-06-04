@@ -11,7 +11,7 @@ const useEmployees = () => {
    } = useQuery({
       queryKey: ["employees"],
       queryFn: async () => {
-         const { data } = await axiosSecure(`/employees`);
+         const { data } = await axiosSecure(`/people`);
          return data;
       },
    });

@@ -39,6 +39,13 @@ const Register = () => {
    const onSubmit = async (data) => {
       console.log(data);
 
+      const userData = {
+         ...data,
+         verified: false,
+         // convert salary to integer before sending to backend
+         salary: parseInt(data.salary),
+         bankAC: parseInt(data.bankAC),
+      };
       //   Show confirmation dialog
       const confirmationResult = await Swal.fire({
          title: "Confirm?",
@@ -49,13 +56,15 @@ const Register = () => {
          cancelButtonText: "No, wait",
       });
 
+      console.log(userData);
+
       if (confirmationResult.isConfirmed) {
          // create user imported from AuthContext
          try {
             await createUser(data.email, data.password);
             await updateUser(data.userName, data.photoURL);
 
-            const result = await axiosPublic.post("/employees", data);
+            const result = await axiosPublic.post("/people", userData);
             console.log(result.data);
             // have to set loading to false else after
             // redirecting to page, it will keep showing the loader
@@ -98,11 +107,18 @@ const Register = () => {
 
          const userInfo = {
             email: result.user.email,
+            photoURL: result.user.photoURL,
             userName: result.user.displayName,
             role: "employee",
+            salary: 3000,
+            bankAC: 192837465,
+            designation: "Executive, Sales",
+            verified: false,
          };
 
-         await axiosPublic.post("/employees", userInfo);
+         console.log(userInfo);
+
+         await axiosPublic.post("/people", userInfo);
 
          toast.success("LOGGED IN SUCCESSFULLY");
       } catch (error) {

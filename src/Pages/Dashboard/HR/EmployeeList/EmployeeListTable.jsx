@@ -1,4 +1,7 @@
 import PropTypes from "prop-types";
+import { ImCross } from "react-icons/im";
+import { FaCircleCheck } from "react-icons/fa6";
+import LinkButton from "../../../../Components/Shared/Button/LinkButton";
 
 const EmployeeListTable = ({ employees }) => {
    return (
@@ -9,7 +12,7 @@ const EmployeeListTable = ({ employees }) => {
          <table className="table table-zebra">
             {/* head */}
             <thead>
-               <tr className="*:tracking-wider uppercase text-base text-ourPrimary">
+               <tr className="*:tracking-wider uppercase text-base text-ourPrimary text-center">
                   <th>#</th>
                   <th>Name</th>
                   <th>Status</th>
@@ -24,11 +27,21 @@ const EmployeeListTable = ({ employees }) => {
                   <tr key={employee._id}>
                      <th>{index + 1}</th>
                      <td>{employee?.userName}</td>
-                     <td>{employee?.status}</td>
+                     {employee?.status === "Verified" ? (
+                        <td>
+                           <FaCircleCheck className="text-green-500 text-lg" />
+                        </td>
+                     ) : (
+                        <td>
+                           <ImCross className="text-ourPrimary" />
+                        </td>
+                     )}
                      <td>{employee?.bankAC}</td>
                      <td>{employee?.salary}</td>
                      <td>PAY</td>
-                     <td>{employee?.designation}</td>
+                     <td>
+                        <LinkButton name={"Details"} />
+                     </td>
                   </tr>
                ))}
             </tbody>

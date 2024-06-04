@@ -69,16 +69,20 @@ const Login = () => {
 
          const userInfo = {
             email: result.user.email,
+            photoURL: result.user.photoURL,
             userName: result.user.displayName,
             role: "employee",
+            salary: 3000,
+            bankAC: 192837465,
+            designation: "Executive, Sales",
+            verified: false,
          };
 
-         await axiosPublic.post("/employees", userInfo);
+         console.log(userInfo);
+
+         await axiosPublic.post("/people", userInfo);
 
          toast.success("LOGGED IN SUCCESSFULLY");
-
-         // after login correct redirection
-         navigate(location?.state || "/");
       } catch (error) {
          const errorMessage = error.message
             .split("Firebase: Error (auth/")[1]
