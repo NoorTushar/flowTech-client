@@ -7,6 +7,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import useWorks from "../../../Hooks/useWorks";
 import WorkSheetTable from "./WorkSheetTable";
+import ConfirmAddModal from "../../../Components/Shared/Modals/ConfirmAddModal";
 
 const WorkSheet = () => {
    const [startDate, setStartDate] = useState(new Date());
@@ -121,36 +122,11 @@ const WorkSheet = () => {
          </form>
 
          {/* Modal */}
-         {isModalOpen && (
-            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full items-center justify-center flex flex-col z-50">
-               <div className="relative  mx-auto p-5 border max-w-[500px] shadow-lg bg-white">
-                  <div className="mt-3 text-center">
-                     <h3 className="text-lg leading-6 font-medium text-gray-900 uppercase tracking-widest">
-                        Confirm Addition
-                     </h3>
-                     <div className="mt-2 px-7 py-3">
-                        <p className="text text-gray-500">
-                           Are you sure you want to add this work entry?
-                        </p>
-                     </div>
-                     <div className="flex items-center px-4 py-3">
-                        <button
-                           className="w-full px-5 py-2 relative bg-ourPrimary group overflow-hidden font-medium text-white border-2 border-ourPrimary mr-2 hover:border-ourPrimary hover:bg-white hover:text-ourPrimary flex justify-center items-center duration-300 tracking-widest"
-                           onClick={confirmAddWork}
-                        >
-                           YES
-                        </button>
-                        <button
-                           className="w-full px-5 py-2 relative bg-ourAsh group overflow-hidden font-medium text-white border-2 border-ourAsh mr-2 hover:border-ourAsh hover:bg-white hover:text-ourAsh flex justify-center items-center duration-300 tracking-widest"
-                           onClick={closeModal}
-                        >
-                           NO
-                        </button>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         )}
+         <ConfirmAddModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            onConfirm={confirmAddWork}
+         />
 
          {/* Work Data Table */}
 
