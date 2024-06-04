@@ -73,7 +73,7 @@ const Login = () => {
             role: "employee",
          };
 
-         await axiosPublic.post("/users", userInfo);
+         await axiosPublic.post("/employees", userInfo);
 
          toast.success("LOGGED IN SUCCESSFULLY");
       } catch (error) {

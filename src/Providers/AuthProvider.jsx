@@ -67,7 +67,7 @@ const AuthProvider = ({ children }) => {
    //          role: "guest",
    //          status: "Verified",
    //       };
-   //       const { data } = await axiosPublic.put(`/users`, currentUser);
+   //       const { data } = await axiosPublic.put(`/employees`, currentUser);
    //       return data;
    //    },
    //    [axiosPublic]

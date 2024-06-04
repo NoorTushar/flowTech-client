@@ -55,7 +55,7 @@ const Register = () => {
             await createUser(data.email, data.password);
             await updateUser(data.userName, data.photoURL);
 
-            const result = await axiosPublic.post("/users", data);
+            const result = await axiosPublic.post("/employees", data);
             console.log(result.data);
             // have to set loading to false else after
             // redirecting to page, it will keep showing the loader
@@ -102,7 +102,7 @@ const Register = () => {
             role: "employee",
          };
 
-         await axiosPublic.post("/users", userInfo);
+         await axiosPublic.post("/employees", userInfo);
 
          toast.success("LOGGED IN SUCCESSFULLY");
       } catch (error) {
