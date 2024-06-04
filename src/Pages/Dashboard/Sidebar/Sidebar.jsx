@@ -83,6 +83,13 @@ const Sidebar = () => {
                         icon={LuFileSpreadsheet}
                         address={"work-sheet"}
                      />
+
+                     {/* Payment History */}
+                     <MenuItem
+                        label={"Payment History"}
+                        icon={LuFileSpreadsheet}
+                        address={"payment-history"}
+                     />
                   </nav>
                </div>
             </div>
