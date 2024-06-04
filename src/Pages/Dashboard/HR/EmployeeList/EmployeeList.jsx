@@ -32,12 +32,16 @@ const EmployeeList = () => {
    const { mutateAsync: payEmployee } = useMutation({
       mutationKey: ["pay"],
       mutationFn: async ({ month, year, salary, email }) => {
+         console.log(month, year, salary, email);
+         const joinedDate = month + year;
+         console.log(joinedDate);
          try {
             const { data } = await axiosSecure.post(`/pay`, {
                month,
                year,
                salary,
                email,
+               joinedDate,
             });
             if (data.message) {
                return toast.error(

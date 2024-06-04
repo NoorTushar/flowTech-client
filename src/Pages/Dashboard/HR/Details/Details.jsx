@@ -10,6 +10,7 @@ const Details = () => {
 
    const { data: employee } = useQuery({
       queryKey: ["employee", email],
+      enabled: !!email,
       queryFn: async () => {
          const { data } = await axiosSecure.get(`/people/${email}`);
          console.log(data);
@@ -19,14 +20,16 @@ const Details = () => {
 
    const { data: payments } = useQuery({
       queryKey: ["payment", email],
+      enabled: !!email,
       queryFn: async () => {
-         const { data } = await axiosSecure.get(`/payments/${email}`);
+         const { data } = await axiosSecure.get(`/pay/${email}`);
          console.log(data);
          return data;
       },
    });
 
    console.log(payments);
+
    return (
       <div>
          <Title
@@ -38,7 +41,7 @@ const Details = () => {
          <div className="flex justify-center gap-6 items-center">
             <img
                className="size-[200px] rounded-full"
-               src={employee.image}
+               src={employee?.image}
                alt=""
             />
             <div className="space-y-6">
