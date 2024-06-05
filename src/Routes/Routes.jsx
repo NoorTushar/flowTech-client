@@ -10,6 +10,7 @@ import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import EmployeeList from "../Pages/Dashboard/HR/EmployeeList/EmployeeList";
 import Details from "../Pages/Dashboard/HR/Details/Details";
 import Progress from "../Pages/Dashboard/HR/Progress/Progress";
+import ContactUs from "../Pages/ContactUs/ContactUs";
 
 export const router = createBrowserRouter([
    {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
          {
             path: "/register",
             element: <Register />,
+         },
+         {
+            path: "/contact-us",
+            element: <ContactUs />,
          },
       ],
    },
