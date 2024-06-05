@@ -3,6 +3,7 @@ import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Components/Shared/LoadingSpinner";
 import Title from "../../../Components/Shared/Title/Title";
+import PaymentHistoryTable from "./PaymentHistoryTable";
 
 const PaymentHistory = () => {
    /**
@@ -39,6 +40,9 @@ const PaymentHistory = () => {
                titleColor={"black"}
             />
          </div>
+
+         {/* table */}
+         <PaymentHistoryTable payments={payments} />
       </div>
    );
 };
