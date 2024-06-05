@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import EmployeeList from "../Pages/Dashboard/HR/EmployeeList/EmployeeList";
 import Details from "../Pages/Dashboard/HR/Details/Details";
+import Progress from "../Pages/Dashboard/HR/Progress/Progress";
 
 export const router = createBrowserRouter([
    {
@@ -68,6 +69,14 @@ export const router = createBrowserRouter([
             element: (
                <PrivateRoute>
                   <Details />
+               </PrivateRoute>
+            ),
+         },
+         {
+            path: "progress",
+            element: (
+               <PrivateRoute>
+                  <Progress />
                </PrivateRoute>
             ),
          },

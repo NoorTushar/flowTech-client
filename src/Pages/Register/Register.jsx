@@ -83,12 +83,7 @@ const Register = () => {
                // redirecting to page, it will keep showing the loader
                setLoading(false);
                reset();
-               Swal.fire({
-                  title: "Success!",
-                  text: "Registration Successful!",
-                  icon: "success",
-                  confirmButtonText: "Ok",
-               });
+               toast.success("LOGGED IN SUCCESSFULLY");
 
                // navigate to private route or homepage
                navigate(location?.state || "/");
@@ -99,15 +94,7 @@ const Register = () => {
                   .split(")")[0]
                   .replace(/-/g, " ");
 
-               Swal.fire({
-                  title: "Failure!",
-                  text: `${errorMessage}`,
-                  icon: "error",
-                  width: 600,
-                  color: "#A65F3F",
-                  background: "",
-                  confirmButtonText: "Ok",
-               });
+               toast.error(errorMessage?.toUpperCase());
             }
          }
       }
@@ -135,13 +122,15 @@ const Register = () => {
          await axiosPublic.post("/people", userInfo);
 
          toast.success("LOGGED IN SUCCESSFULLY");
+         // navigate to private route or homepage
+         navigate(location?.state || "/");
       } catch (error) {
-         const errorMessage = error.message
+         const errorMessage = error?.message
             .split("Firebase: Error (auth/")[1]
             .split(")")[0]
             .replace(/-/g, " ");
 
-         toast.error(errorMessage.toUpperCase());
+         toast.error(errorMessage?.toUpperCase());
       }
    };
    return (

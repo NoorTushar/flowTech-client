@@ -57,7 +57,7 @@ const Login = () => {
             .split(")")[0]
             .replace(/-/g, " ");
 
-         toast.error(errorMessage.toUpperCase());
+         toast.error(errorMessage?.toUpperCase());
       }
    };
 
@@ -83,13 +83,14 @@ const Login = () => {
          await axiosPublic.post("/people", userInfo);
 
          toast.success("LOGGED IN SUCCESSFULLY");
+         navigate(location?.state || "/");
       } catch (error) {
-         const errorMessage = error.message
+         const errorMessage = error?.message
             .split("Firebase: Error (auth/")[1]
             .split(")")[0]
             .replace(/-/g, " ");
 
-         toast.error(errorMessage.toUpperCase());
+         toast.error(errorMessage?.toUpperCase());
       }
    };
 
