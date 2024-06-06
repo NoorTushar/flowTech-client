@@ -11,10 +11,66 @@ const Progress = () => {
    const [selectedName, setSelectedName] = useState("");
    const [currentName, setCurrentName] = useState("");
 
+   const [selectMonth, setSelectMonth] = useState("");
+   const [currentMonth, setCurrentMonth] = useState("");
+
+   const months = [
+      {
+         month: "January",
+         code: "01",
+      },
+      {
+         month: "February",
+         code: "02",
+      },
+      {
+         month: "March",
+         code: "03",
+      },
+      {
+         month: "April",
+         code: "04",
+      },
+      {
+         month: "May",
+         code: "05",
+      },
+      {
+         month: "June",
+         code: "06",
+      },
+      {
+         month: "July",
+         code: "07",
+      },
+      {
+         month: "August",
+         code: "08",
+      },
+      {
+         month: "September",
+         code: "09",
+      },
+      {
+         month: "October",
+         code: "10",
+      },
+      {
+         month: "November",
+         code: "11",
+      },
+      {
+         month: "December",
+         code: "12",
+      },
+   ];
+
    const { data, isLoading } = useQuery({
-      queryKey: ["allWorks", selectedName],
+      queryKey: ["allWorks", selectedName, selectMonth],
       queryFn: async () => {
-         const { data } = await axiosSecure(`/works/?name=${selectedName}`);
+         const { data } = await axiosSecure(
+            `/works/?name=${selectedName}&month=${selectMonth}`
+         );
          console.log(data);
          return data;
       },
@@ -29,13 +85,23 @@ const Progress = () => {
       setCurrentName(selectedName);
    }, [selectedName]);
 
+   const handleMonthName = (e) => {
+      e.preventDefault();
+      setSelectMonth(e.target.value);
+   };
+
+   useEffect(() => {
+      setCurrentMonth(selectMonth);
+   }, [selectMonth]);
+
    console.log("selected Name:", selectedName);
    console.log("current name", currentName);
+   console.log("selected month:", selectMonth);
+   console.log("current month", currentMonth);
    const allWorks = data?.works || [];
    const uniqueNames = data?.uniqueNames || [];
 
    if (isLoading) return <LoadingSpinner />;
-   console.log(allWorks, uniqueNames);
 
    return (
       <div>
@@ -46,15 +112,31 @@ const Progress = () => {
          />
          {/* Filter Fields */}
          <div>
+            {/* Select Name */}
+            <div>
+               <select
+                  name="filterName"
+                  value={currentName}
+                  onChange={handleFilterName}
+               >
+                  <option value="">filter by name</option>
+                  {uniqueNames.map((uname, index) => (
+                     <option key={index} value={uname.employeeName}>
+                        {uname.employeeName}
+                     </option>
+                  ))}
+               </select>
+            </div>
+            {/* Select Month */}
             <select
-               name="filterName"
-               value={currentName}
-               onChange={handleFilterName}
+               name="month"
+               value={currentMonth}
+               onChange={handleMonthName}
             >
-               <option value="">filter by name</option>
-               {uniqueNames.map((uname, index) => (
-                  <option key={index} value={uname.employeeName}>
-                     {uname.employeeName}
+               <option value="">filter by month</option>
+               {months.map((month, index) => (
+                  <option key={index} value={month.code}>
+                     {month.month}
                   </option>
                ))}
             </select>
@@ -73,18 +155,24 @@ const Progress = () => {
                      </tr>
                   </thead>
                   <tbody>
-                     {allWorks.map((work, index) => (
-                        <tr key={work._id}>
-                           <td>{index + 1}</td>
-                           <td>{work.employeeName}</td>
-                           <td>{work.employeeEmail}</td>
-                           <td>{work.task}</td>
-                           <td>{work.workHours}</td>
-                           <td>
-                              {format(new Date(work.workDate), "dd/MM/yyyy")}
-                           </td>
-                        </tr>
-                     ))}
+                     {allWorks.length > 0 ? (
+                        allWorks.map((work, index) => (
+                           <tr key={work._id}>
+                              <td>{index + 1}</td>
+                              <td>{work.employeeName}</td>
+                              <td>{work.employeeEmail}</td>
+                              <td>{work.task}</td>
+                              <td>{work.workHours}</td>
+                              <td>
+                                 {format(new Date(work.workDate), "dd/MM/yyyy")}
+                              </td>
+                           </tr>
+                        ))
+                     ) : (
+                        <p className="text-center text-ourPrimary">
+                           No data to show
+                        </p>
+                     )}
                   </tbody>
                </table>
             </div>
