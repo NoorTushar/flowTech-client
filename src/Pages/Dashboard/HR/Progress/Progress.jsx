@@ -4,10 +4,10 @@ import Title from "../../../../Components/Shared/Title/Title";
 import useAllWorks from "../../../../Hooks/useAllWorks";
 
 const Progress = () => {
-   const [allWorks, isLoading] = useAllWorks();
+   const [allWorks, uniqueNames, isLoading] = useAllWorks();
 
    if (isLoading) return <LoadingSpinner />;
-   console.log(allWorks);
+   console.log(allWorks, uniqueNames);
 
    return (
       <div>
@@ -16,7 +16,17 @@ const Progress = () => {
             titleColor={"black"}
             textAlign={"center"}
          />
-
+         {/* Filter Fields */}
+         <div>
+            <select name="filterName">
+               <option value="">filter by name</option>
+               {uniqueNames.map((uname, index) => (
+                  <option key={index} value={uname.employeeName}>
+                     {uname.employeeName}
+                  </option>
+               ))}
+            </select>
+         </div>
          {/* Table */}
          <div>
             <div className="overflow-x-auto">
