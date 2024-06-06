@@ -5,6 +5,7 @@ import LoadingSpinner from "../Components/Shared/LoadingSpinner";
 
 const useWorks = () => {
    const { user } = useAuth();
+   console.log(user.email);
    const axiosSecure = useAxiosSecure();
    const {
       data: works = [],
@@ -15,6 +16,7 @@ const useWorks = () => {
       enabled: !!user.email,
       queryFn: async () => {
          const { data } = await axiosSecure(`/works/${user.email}`);
+         console.log(data);
          return data;
       },
    });

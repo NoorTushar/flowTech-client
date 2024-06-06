@@ -27,7 +27,13 @@ const WorkSheet = () => {
       const workHours = parseInt(form.workHours.value);
       const workDate = startDate.toISOString();
 
-      setFormData({ task, workHours, workDate, employee: user.email });
+      setFormData({
+         task,
+         workHours,
+         workDate,
+         employeeEmail: user.email,
+         employeeName: user.displayName,
+      });
 
       // Open the modal when the form is submitted
       setIsModalOpen(true);

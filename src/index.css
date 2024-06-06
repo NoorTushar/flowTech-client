@@ -13,6 +13,12 @@ body {
 
 p,
 input,
-textarea {
+textarea,
+td {
    font-family: "Didact Gothic", sans-serif;
+}
+th {
+   letter-spacing: 1px;
+   text-transform: uppercase;
+   font-size: 16px;
 }
