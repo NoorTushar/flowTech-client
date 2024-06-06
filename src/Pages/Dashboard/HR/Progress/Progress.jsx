@@ -100,6 +100,10 @@ const Progress = () => {
    console.log("current month", currentMonth);
    const allWorks = data?.works || [];
    const uniqueNames = data?.uniqueNames || [];
+   // Using reduce to sum all work hours
+   const totalWorkHours = allWorks.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.workHours;
+   }, 0);
 
    if (isLoading) return <LoadingSpinner />;
 
@@ -141,6 +145,10 @@ const Progress = () => {
                ))}
             </select>
          </div>
+         {/* Total Hours Worked */}
+         <div>
+            <h3>Total Hours Worked : {totalWorkHours}</h3>
+         </div>
          {/* Table */}
          <div>
             <div className="overflow-x-auto">
@@ -149,9 +157,11 @@ const Progress = () => {
                   <thead>
                      <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Job</th>
-                        <th>Favorite Color</th>
+                        <th>name</th>
+                        <th>task</th>
+                        <th>hours</th>
+                        <th>date</th>
+                        <th>email</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -160,12 +170,12 @@ const Progress = () => {
                            <tr key={work._id}>
                               <td>{index + 1}</td>
                               <td>{work.employeeName}</td>
-                              <td>{work.employeeEmail}</td>
                               <td>{work.task}</td>
                               <td>{work.workHours}</td>
                               <td>
                                  {format(new Date(work.workDate), "dd/MM/yyyy")}
                               </td>
+                              <td>{work.employeeEmail}</td>
                            </tr>
                         ))
                      ) : (
