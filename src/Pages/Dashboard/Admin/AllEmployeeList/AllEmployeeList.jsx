@@ -4,20 +4,32 @@ import { ImCross } from "react-icons/im";
 import FireModal from "../../../../Components/Shared/Modals/FireModal";
 import { useState } from "react";
 import useVerifiedEmployees from "../../../../Hooks/useVerifiedEmployees";
+import MakeHRModal from "../../../../Components/Shared/Modals/MakeHRModal";
+import { RiMedal2Fill } from "react-icons/ri";
 
 const AllEmployeeList = () => {
    const [verifiedEmployees, refetch] = useVerifiedEmployees();
    const [isOpen, setIsOpen] = useState(false);
    const [selectedEmail, setSelectedEmail] = useState("");
+   const [isHRModalOpen, setIsHRModalOpen] = useState(false);
+   const [selectForHR, setSelectForHR] = useState({});
 
    const handleOpenModal = (email) => {
-      console.log(`open korar time e ai mail paisi`, email);
       setSelectedEmail(email);
       setIsOpen(true);
    };
 
    const handleCloseModal = () => {
       setIsOpen(false);
+   };
+
+   const handleOpenMakeHRModal = (employee) => {
+      setSelectForHR(employee);
+      setIsHRModalOpen(true);
+   };
+
+   const handleCloseHRModal = () => {
+      setIsHRModalOpen(false);
    };
 
    return (
@@ -58,6 +70,24 @@ const AllEmployeeList = () => {
                                     src={employee?.photoURL}
                                     alt={employee?.userName}
                                  />
+                              </td>
+                              <td className="text-center">
+                                 {employee?.role === "fired" ? (
+                                    <p className="text-ourPrimary font-didact font-bold">
+                                       Fired
+                                    </p>
+                                 ) : employee?.role === "hr" ? (
+                                    <RiMedal2Fill className="text-3xl " />
+                                 ) : (
+                                    <button
+                                       onClick={() =>
+                                          handleOpenMakeHRModal(employee)
+                                       }
+                                       className="btn btn-sm bg-ourBlack text-white rounded-none whitespace-nowrap"
+                                    >
+                                       Make HR
+                                    </button>
+                                 )}
                               </td>
                               <td className="text-center">
                                  {employee.role === "fired" ? (
@@ -104,6 +134,12 @@ const AllEmployeeList = () => {
                   isOpen={isOpen}
                   handleCloseModal={handleCloseModal}
                   selectedEmail={selectedEmail}
+                  refetch={refetch}
+               />
+               <MakeHRModal
+                  selectForHR={selectForHR}
+                  isHRModalOpen={isHRModalOpen}
+                  handleCloseHRModal={handleCloseHRModal}
                   refetch={refetch}
                />
             </div>

@@ -1,56 +1,61 @@
-import { useMutation } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-const FireModal = ({ isOpen, handleCloseModal, selectedEmail, refetch }) => {
+const MakeHRModal = ({
+   isHRModalOpen,
+   selectForHR,
+   handleCloseHRModal,
+   refetch,
+}) => {
    const axiosSecure = useAxiosSecure();
 
    const { mutateAsync: fireEmployee } = useMutation({
       mutationKey: ["employee"],
       mutationFn: async (email) => {
-         const result = await axiosSecure.patch(`/firePeople/${email}`);
+         const result = await axiosSecure.patch(`/makeHR/${email}`);
          // console.log(result);
          return result;
       },
       onSuccess: () => {
-         toast.success("🔥 EMPLOYEE FIRED AND ADDED TO FIRED LIST");
+         toast.success(`${selectForHR.userName} is now a HR!`);
          refetch();
       },
       onError: () => {
-         toast.error("could not fire employee");
-         handleCloseModal();
+         toast.error("could not make HR");
+         handleCloseHRModal();
       },
    });
 
-   const handleFireEmployee = async (email) => {
+   const handleMakeHR = async (email) => {
       await fireEmployee(email);
-      handleCloseModal();
+      handleCloseHRModal();
    };
-
    return (
-      isOpen && (
+      isHRModalOpen && (
          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full items-center justify-center flex flex-col z-50">
             <div className="relative mx-auto p-5 border max-w-[500px] shadow-lg bg-white">
                <div className="mt-3 text-center">
                   <h3 className="text-lg leading-6 font-medium text-gray-900 uppercase tracking-widest">
-                     Confirm Fire
+                     Confirm Make HR
                   </h3>
                   <div className="mt-2 px-7 py-3">
                      <p className="text text-gray-500">
-                        Are you sure you want to fire this employee?
+                        Are you sure you want to make {selectForHR.userName} a
+                        HR?
                      </p>
                   </div>
                   <div className="flex items-center px-4 py-3">
                      <button
-                        onClick={() => handleFireEmployee(selectedEmail)}
-                        className="w-full px-5 py-2 relative bg-ourPrimary group overflow-hidden font-medium text-white border-2 border-ourPrimary mr-2 hover:border-ourPrimary hover:bg-white hover:text-ourPrimary flex justify-center items-center duration-300 tracking-widest"
+                        onClick={() => handleMakeHR(selectForHR.email)}
+                        className="w-full px-5 py-2 relative bg-ourPrimary group overflow-hidden font-medium text-white border-2 border-ourPrimary mr-2 hover:border-ourPrimary hover:bg-white hover:text-ourPrimary flex justify-center items-center duration-300 tracking-widest whitespace-nowrap"
                      >
-                        FIRE
+                        MAKE HR
                      </button>
                      <button
+                        onClick={handleCloseHRModal}
                         className="w-full px-5 py-2 relative bg-ourAsh group overflow-hidden font-medium text-white border-2 border-ourAsh mr-2 hover:border-ourAsh hover:bg-white hover:text-ourAsh flex justify-center items-center duration-300 tracking-widest"
-                        onClick={handleCloseModal}
                      >
                         NO
                      </button>
@@ -62,11 +67,12 @@ const FireModal = ({ isOpen, handleCloseModal, selectedEmail, refetch }) => {
    );
 };
 
-FireModal.propTypes = {
-   isOpen: PropTypes.bool.isRequired,
-   handleCloseModal: PropTypes.func.isRequired,
+MakeHRModal.propTypes = {
+   // isOpen: PropTypes.bool.isRequired,
+   isHRModalOpen: PropTypes.bool.isRequired,
+   selectForHR: PropTypes.object.isRequired,
+   handleCloseHRModal: PropTypes.func.isRequired,
    refetch: PropTypes.func.isRequired,
-   selectedEmail: PropTypes.string.isRequired,
 };
 
-export default FireModal;
+export default MakeHRModal;
