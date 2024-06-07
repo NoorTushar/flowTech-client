@@ -179,9 +179,13 @@ const Progress = () => {
                            </tr>
                         ))
                      ) : (
-                        <p className="text-center text-ourPrimary">
-                           No data to show
-                        </p>
+                        <tr>
+                           <td>
+                              <p className="text-center text-ourPrimary">
+                                 No data to show
+                              </p>
+                           </td>
+                        </tr>
                      )}
                   </tbody>
                </table>
