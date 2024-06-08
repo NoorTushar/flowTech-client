@@ -6,6 +6,7 @@ import { useState } from "react";
 import useVerifiedEmployees from "../../../../Hooks/useVerifiedEmployees";
 import MakeHRModal from "../../../../Components/Shared/Modals/MakeHRModal";
 import { RiMedal2Fill } from "react-icons/ri";
+import UpdateSalaryModal from "../../../../Components/Shared/Modals/UpdateSalaryModal";
 
 const AllEmployeeList = () => {
    const [verifiedEmployees, refetch] = useVerifiedEmployees();
@@ -13,6 +14,9 @@ const AllEmployeeList = () => {
    const [selectedEmail, setSelectedEmail] = useState("");
    const [isHRModalOpen, setIsHRModalOpen] = useState(false);
    const [selectForHR, setSelectForHR] = useState({});
+   const [isUpdateSalaryModalOpen, setIsUpdateSalaryModalOpen] =
+      useState(false);
+   const [selectedForSalaryUpdate, setSelectedForSalaryUpdate] = useState({});
 
    const handleOpenModal = (email) => {
       setSelectedEmail(email);
@@ -30,6 +34,15 @@ const AllEmployeeList = () => {
 
    const handleCloseHRModal = () => {
       setIsHRModalOpen(false);
+   };
+
+   const handleOpenSalaryModal = (employee) => {
+      setSelectedForSalaryUpdate(employee);
+      setIsUpdateSalaryModalOpen(true);
+   };
+
+   const handleCloseSalaryModal = () => {
+      setIsUpdateSalaryModalOpen(false);
    };
 
    return (
@@ -107,7 +120,17 @@ const AllEmployeeList = () => {
                               </td>
                               <td>{employee?.userName}</td>
                               <td>{employee?.role}</td>
-                              <td>{employee?.salary}</td>
+                              <td className="flex items-center gap-4">
+                                 {employee?.salary}{" "}
+                                 <button
+                                    onClick={() =>
+                                       handleOpenSalaryModal(employee)
+                                    }
+                                    className="btn btn-sm bg-ourBlack text-white rounded-none whitespace-nowrap"
+                                 >
+                                    Update Salary
+                                 </button>
+                              </td>
                               <td>{employee?.designation}</td>
                               <td>
                                  {employee?.verified ? (
@@ -140,6 +163,12 @@ const AllEmployeeList = () => {
                   selectForHR={selectForHR}
                   isHRModalOpen={isHRModalOpen}
                   handleCloseHRModal={handleCloseHRModal}
+                  refetch={refetch}
+               />
+               <UpdateSalaryModal
+                  isUpdateSalaryModalOpen={isUpdateSalaryModalOpen}
+                  selectedForSalaryUpdate={selectedForSalaryUpdate}
+                  handleCloseSalaryModal={handleCloseSalaryModal}
                   refetch={refetch}
                />
             </div>
