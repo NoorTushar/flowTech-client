@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import LinkButton from "../Shared/Button/LinkButton";
+import { GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
 
 const Slide = ({ bgImg, swiperRef }) => {
    return (
@@ -23,18 +24,24 @@ const Slide = ({ bgImg, swiperRef }) => {
                <div className="flex justify-start">
                   <LinkButton name={"our services"} width="160px"></LinkButton>
                </div>
-               <div className="custom-navigation">
+               <div className="custom-navigation space-x-4 mt-6">
                   <button
                      onClick={() => swiperRef.current?.slidePrev()}
-                     className="custom-prev"
+                     className="p-2 relative group overflow-hidden font-medium bg-transparent text-ourPrimary inline-block custom-next border-ourPrimary border hover:border-white"
                   >
-                     Prev
+                     <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-90"></span>
+                     <span className="relative group-hover:text-ourPrimary">
+                        <GrFormPreviousLink className="text-2xl" />
+                     </span>
                   </button>
                   <button
                      onClick={() => swiperRef.current?.slideNext()}
-                     className="custom-next"
+                     className="p-2 relative group overflow-hidden font-medium bg-transparent text-ourPrimary inline-block custom-next border-ourPrimary border hover:border-white"
                   >
-                     Next
+                     <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-90"></span>
+                     <span className="relative group-hover:text-ourPrimary">
+                        <GrFormNextLink className="text-2xl" />
+                     </span>
                   </button>
                </div>
             </div>

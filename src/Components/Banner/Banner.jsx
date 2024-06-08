@@ -23,14 +23,10 @@ const Banner = () => {
             centeredSlides={true}
             effect={"fade"}
             loop={true}
-            pagination={{
-               clickable: true,
-            }}
             autoplay={{
                delay: 3500,
                disableOnInteraction: false,
             }}
-            navigation={true}
             modules={[Pagination, Navigation, Autoplay, EffectFade]}
             className="mySwiper"
          >
