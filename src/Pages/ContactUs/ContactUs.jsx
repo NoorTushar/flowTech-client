@@ -1,49 +1,70 @@
+import { useState } from "react";
+import Title from "../../Components/Shared/Title/Title";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import bgImg from "./contactUs.jpg";
+import { FaLocationDot } from "react-icons/fa6";
+import { FaPhone } from "react-icons/fa6";
+import toast from "react-hot-toast";
+import { ImSpinner9 } from "react-icons/im";
 
 const ContactUs = () => {
-   const handleSubmit = (e) => {
+   const axiosSecure = useAxiosSecure();
+   const [mloading, setMLoading] = useState(false);
+
+   const handleSubmit = async (e) => {
       e.preventDefault();
+      setMLoading(true);
       const form = e.target;
-      const mailerName = form.name.value;
+
       const mailerEmail = form.email.value;
       const mailerMessage = form.message.value;
 
       const mailerData = {
-         mailerName,
          mailerEmail,
          mailerMessage,
       };
       console.log(mailerData);
+
+      const { data } = await axiosSecure.post("/messages", mailerData);
+      if (data.insertedId) {
+         toast.success("MESSAGE SENT");
+         setMLoading(false);
+      } else {
+         toast.error("MESSAGE WAS NOT SENT");
+         setMLoading(false);
+      }
+
+      form.reset();
    };
 
    return (
-      <div className="pt-[65px] lg:pt-[74px] bg-ourBlack">
-         <div className="grid max-w-screen-xl grid-cols-1 gap-8 px-8 py-16 mx-auto rounded-lg md:grid-cols-2 md:px-12 lg:px-16 xl:px-32  text-gray-100">
+      <div className="pt-[65px] lg:pt-[86px] bg-ourBlack">
+         <div className="md:-mb-7">
+            <Title title={"contact us"} textAlign={"center"} />
+         </div>
+         <div className="text-center text-white mx-auto max-w-lg space-y-3">
+            <div
+               className="flex
+             items-center justify-center gap-1"
+            >
+               <FaLocationDot className="text-ourPrimary text-lg" />
+               <h3>Address: 68, New Eskaton Road, Dhaka, Banglaesh</h3>
+            </div>
+
+            <div
+               className="flex
+             items-center justify-center gap-2"
+            >
+               <FaPhone className="text-ourPrimary text-lg" />
+               <p>Phone: +880 168 302 1094</p>
+            </div>
+         </div>
+         <div className="grid max-w-screen-xl grid-cols-1 gap-8 px-8 pt-16 pb-4 mx-auto -lg md:grid-cols-2 md:px-12 lg:px-16 xl:px-32  text-gray-100">
             <div className="flex flex-col justify-between">
-               <div className="space-y-2">
-                  <h2 className="text-4xl font-bold leading-tight lg:text-5xl">
-                     Let`s talk!
-                  </h2>
-                  <div className="text-gray-400">
-                     Mail us @ xntric123@gmail.com
-                  </div>
-               </div>
-               <img src={bgImg} alt="" className="p-6 object-cover" />
+               <img src={bgImg} alt="" className="object-cover h-full w-full" />
             </div>
             <form onSubmit={handleSubmit} className="space-y-6">
-               <div>
-                  <label htmlFor="name" className="text-sm">
-                     Full name
-                  </label>
-                  <input
-                     required
-                     name="name"
-                     type="text"
-                     placeholder=""
-                     className="w-full p-3 rounded bg-ourLighterBlack"
-                  />
-               </div>
-               <div>
+               <div className="space-y-2">
                   <label htmlFor="email" className="text-sm">
                      Your Email
                   </label>
@@ -51,25 +72,35 @@ const ContactUs = () => {
                      required
                      name="email"
                      type="email"
-                     className="w-full p-3 rounded bg-ourLighterBlack"
+                     className="w-full p-3  bg-ourLighterBlack border-b border-ourAsh focus:border-ourPrimary  outline-none "
                   />
                </div>
-               <div>
+               <div className="space-y-2">
                   <label htmlFor="message" className="text-sm">
                      Message
                   </label>
                   <textarea
                      required
                      name="message"
-                     rows="3"
-                     className="w-full p-3 rounded bg-ourLighterBlack"
+                     rows="5"
+                     className="w-full p-3  bg-ourLighterBlack border-b border-ourAsh focus:border-ourPrimary outline-none"
+                     draggable="false"
                   ></textarea>
                </div>
                <button
+                  disabled={mloading}
                   type="submit"
-                  className="w-full p-3 text-sm font-bold tracking-wide uppercase  bg-ourPrimary text-gray-900"
+                  className="w-full px-5 py-2 relative bg-ourPrimary group  overflow-hidden font-medium text-white border-2 border-ourPrimary mr-2 hover:border-white hover:text-ourPrimary flex justify-center items-center"
                >
-                  Send Message
+                  <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full"></span>
+
+                  {mloading ? (
+                     <ImSpinner9 className="animate-spin text-xl" />
+                  ) : (
+                     <span className="relative tracking-widest uppercase">
+                        Send Message
+                     </span>
+                  )}
                </button>
             </form>
          </div>

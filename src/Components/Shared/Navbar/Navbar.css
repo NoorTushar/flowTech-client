@@ -15,7 +15,7 @@ li .active {
    font-weight: 500;
 }
 
-li .active::after {
+/* li .active::after {
    content: "";
    position: absolute;
    height: 2px;
@@ -43,7 +43,7 @@ li .active::before {
    -moz-transition: 0.3s;
    -ms-transition: 0.3s;
    -o-transition: 0.3s;
-}
+} */
 
 li::before {
    content: "";
@@ -61,7 +61,7 @@ li::before {
 }
 
 li:hover::before {
-   width: 50%;
+   width: 100%;
 }
 
 li::after {
@@ -80,5 +80,5 @@ li::after {
 }
 
 li:hover::after {
-   width: 50%;
+   width: 100%;
 }
