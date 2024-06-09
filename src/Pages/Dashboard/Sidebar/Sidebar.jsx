@@ -11,11 +11,14 @@ import { Link } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import MenuItem from "../../../Components/Dashboard/Sidebar/MenuItem/MenuItem";
 import EmployeeMenu from "../../../Components/Dashboard/Sidebar/EmployeeMenu/EmployeeMenu";
+import useRole from "../../../Hooks/useRole";
 
 const Sidebar = () => {
    const { logOut } = useAuth();
    const [isActive, setActive] = useState(false);
+   const [role] = useRole();
 
+   console.log(role);
    // Sidebar Responsive Handler
    const handleToggle = () => {
       setActive(!isActive);
@@ -69,23 +72,8 @@ const Sidebar = () => {
                <div className="flex flex-col justify-between flex-1 mt-6">
                   {/*  Menu Items */}
                   <nav>
-                     {/* Statistics */}
-
-                     <EmployeeMenu />
-
-                     {/* Work Sheet */}
-                     <MenuItem
-                        label={"Work Sheet"}
-                        icon={LuFileSpreadsheet}
-                        address={"work-sheet"}
-                     />
-
-                     {/* Payment History */}
-                     <MenuItem
-                        label={"Payment History"}
-                        icon={LuFileSpreadsheet}
-                        address={"payment-history"}
-                     />
+                     {/* Show only if a user is an employee */}
+                     {role === "employee" && <EmployeeMenu />}
 
                      {/* Payment History */}
                      <MenuItem

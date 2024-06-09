@@ -13,6 +13,7 @@ import Progress from "../Pages/Dashboard/HR/Progress/Progress";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList/AllEmployeeList";
 import AllMessages from "../Pages/Dashboard/Admin/AllMessages/AllMessages";
+import EmployeeRoute from "./EmployeeRoute";
 
 export const router = createBrowserRouter([
    {
@@ -45,11 +46,14 @@ export const router = createBrowserRouter([
          </PrivateRoute>
       ),
       children: [
+         // Employee Only Routes
          {
             path: "work-sheet",
             element: (
                <PrivateRoute>
-                  <WorkSheet />
+                  <EmployeeRoute>
+                     <WorkSheet />
+                  </EmployeeRoute>
                </PrivateRoute>
             ),
          },
@@ -58,7 +62,9 @@ export const router = createBrowserRouter([
             path: "payment-history",
             element: (
                <PrivateRoute>
-                  <PaymentHistory />
+                  <EmployeeRoute>
+                     <PaymentHistory />
+                  </EmployeeRoute>
                </PrivateRoute>
             ),
          },

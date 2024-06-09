@@ -1,13 +1,21 @@
-import { BsFillHouseAddFill } from "react-icons/bs";
+import { LuFileSpreadsheet } from "react-icons/lu";
 import MenuItem from "../MenuItem/MenuItem";
 
 const EmployeeMenu = () => {
    return (
       <>
+         {/* Work Sheet */}
          <MenuItem
-            icon={BsFillHouseAddFill}
-            label="Add Room"
-            address="add-room"
+            label={"Work Sheet"}
+            icon={LuFileSpreadsheet}
+            address={"work-sheet"}
+         />
+
+         {/* Payment History */}
+         <MenuItem
+            label={"Payment History"}
+            icon={LuFileSpreadsheet}
+            address={"payment-history"}
          />
       </>
    );
