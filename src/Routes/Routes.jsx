@@ -12,6 +12,7 @@ import Details from "../Pages/Dashboard/HR/Details/Details";
 import Progress from "../Pages/Dashboard/HR/Progress/Progress";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList/AllEmployeeList";
+import AllMessages from "../Pages/Dashboard/Admin/AllMessages/AllMessages";
 
 export const router = createBrowserRouter([
    {
@@ -91,6 +92,14 @@ export const router = createBrowserRouter([
             element: (
                <PrivateRoute>
                   <AllEmployeeList />
+               </PrivateRoute>
+            ),
+         },
+         {
+            path: "all-messages",
+            element: (
+               <PrivateRoute>
+                  <AllMessages />
                </PrivateRoute>
             ),
          },

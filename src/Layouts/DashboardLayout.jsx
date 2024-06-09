@@ -10,7 +10,7 @@ const DashboardLayout = () => {
 
          {/* Outlet */}
 
-         <div className="flex-1 lg:ml-64">
+         <div className="flex-1 min-h-[calc(100vh-72px)] lg:ml-64 bg-ourBlack">
             <div className="p-5">
                <Outlet />
             </div>

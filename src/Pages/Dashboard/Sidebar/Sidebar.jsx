@@ -6,11 +6,11 @@ import { LuFileSpreadsheet } from "react-icons/lu";
 import logo from "../../../assets/FlowTech-Logo.png";
 
 import { AiOutlineBars } from "react-icons/ai";
-import { BsGraphUp } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import MenuItem from "../../../Components/Dashboard/Sidebar/MenuItem/MenuItem";
+import EmployeeMenu from "../../../Components/Dashboard/Sidebar/EmployeeMenu/EmployeeMenu";
 
 const Sidebar = () => {
    const { logOut } = useAuth();
@@ -23,7 +23,7 @@ const Sidebar = () => {
    return (
       <>
          {/* Small Screen Navbar */}
-         <div className="bg-gray-100 text-gray-800 flex justify-between lg:hidden">
+         <div className="bg-ourLighterBlack text-gray-800 flex justify-between lg:hidden">
             <div>
                <div className="block cursor-pointer p-4 font-bold">
                   <Link to="/">
@@ -41,13 +41,13 @@ const Sidebar = () => {
                onClick={handleToggle}
                className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-200"
             >
-               <AiOutlineBars className="h-5 w-5" />
+               <AiOutlineBars className="h-5 w-5 text-ourPrimary " />
             </button>
          </div>
 
          {/* Sidebar */}
          <div
-            className={`z-10 lg:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+            className={`z-10 lg:fixed flex flex-col justify-between overflow-x-hidden bg-ourLighterBlack w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
                isActive && "-translate-x-full"
             }  lg:translate-x-0  transition duration-200 ease-in-out`}
          >
@@ -71,11 +71,7 @@ const Sidebar = () => {
                   <nav>
                      {/* Statistics */}
 
-                     <MenuItem
-                        label={"Statistics"}
-                        icon={BsGraphUp}
-                        address={"/"}
-                     />
+                     <EmployeeMenu />
 
                      {/* Work Sheet */}
                      <MenuItem
@@ -105,11 +101,18 @@ const Sidebar = () => {
                         address={"progress"}
                      />
 
-                     {/* Progress */}
+                     {/* All Employee List */}
                      <MenuItem
                         label={"All Employee List"}
                         icon={LuFileSpreadsheet}
                         address={"all-employee-list"}
+                     />
+
+                     {/* All Messages */}
+                     <MenuItem
+                        label={"All Messages"}
+                        icon={LuFileSpreadsheet}
+                        address={"all-messages"}
                      />
                   </nav>
                </div>
