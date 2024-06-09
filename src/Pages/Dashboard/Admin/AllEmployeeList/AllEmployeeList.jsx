@@ -78,7 +78,7 @@ const AllEmployeeList = () => {
          {tableView && (
             <div className="w-full max-w-[720px] mx-auto mt-6">
                <div className="overflow-x-auto">
-                  <table className="table table-zebra">
+                  <table className="table">
                      {/* head */}
                      <thead>
                         <tr>
@@ -202,7 +202,9 @@ const AllEmployeeList = () => {
                {verifiedEmployees.map((employee) => (
                   <div
                      key={employee._id}
-                     className="card  bg-base-100 shadow-xl"
+                     className={`card shadow-xl ${
+                        employee.role === "fired" ? "bg-red-100" : "bg-base-100"
+                     }`}
                   >
                      <div className="card-body">
                         <div className="flex justify-between">
