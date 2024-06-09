@@ -27,7 +27,7 @@ const Details = () => {
       },
    });
 
-   const { data: payments, isLoading: paymentsLoading } = useQuery({
+   const { data: payments = [], isLoading: paymentsLoading } = useQuery({
       queryKey: ["payment", email],
       enabled: !!email,
       queryFn: async () => {
@@ -36,6 +36,7 @@ const Details = () => {
       },
    });
 
+   console.log(payments);
    // Prepare the data for the chart
    const chartData =
       payments?.map((payment) => ({
@@ -67,8 +68,9 @@ const Details = () => {
 
          <div className="flex justify-center gap-6 items-center">
             <img
-               className="size-[200px] rounded-full"
-               src={employee?.photoURL}
+               referrerPolicy="no-referrer"
+               className="size-[120px]"
+               src={employee?.photoURL || employee?.image}
                alt=""
             />
             <div className="space-y-6">
@@ -89,45 +91,52 @@ const Details = () => {
             <h3 className="text-center uppercase tracking-widest text-ourPrimary text-2xl">
                Salary History
             </h3>
-            <ResponsiveContainer>
-               <BarChart
-                  data={chartData}
-                  margin={{
-                     top: 20,
-                     right: 30,
-                     left: 20,
-                     bottom: 40, // Adjusted bottom margin to make room for X-axis label
-                  }}
-               >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis
-                     dataKey="month"
-                     label={{
-                        value: "Month",
-                        position: "insideBottom",
-                        offset: 0,
-                        dy: 20, // Move label down slightly
+
+            {payments.length === 0 ? (
+               <p className="text-center mt-5">
+                  No chat as no salary is paid to this employee yet.
+               </p>
+            ) : (
+               <ResponsiveContainer style={{ marginTop: "20px" }}>
+                  <BarChart
+                     data={chartData}
+                     margin={{
+                        top: 20,
+                        right: 30,
+                        left: 20,
+                        bottom: 40, // Adjusted bottom margin to make room for X-axis label
                      }}
-                  />
-                  <YAxis
-                     label={{
-                        value: "Salary ($)",
-                        angle: -90,
-                        position: "insideLeft",
-                        dy: 20, // Move label down slightly
-                     }}
-                  />
-                  <Tooltip />
-                  <Bar dataKey="salary">
-                     {chartData.map((entry, index) => (
-                        <Cell
-                           key={`cell-${index}`}
-                           fill={barColors[index % barColors.length]}
-                        />
-                     ))}
-                  </Bar>
-               </BarChart>
-            </ResponsiveContainer>
+                  >
+                     <CartesianGrid strokeDasharray="3 3" />
+                     <XAxis
+                        dataKey="month"
+                        label={{
+                           value: "Month",
+                           position: "insideBottom",
+                           offset: 0,
+                           dy: 20, // Move label down slightly
+                        }}
+                     />
+                     <YAxis
+                        label={{
+                           value: "Salary ($)",
+                           angle: -90,
+                           position: "insideLeft",
+                           dy: 20, // Move label down slightly
+                        }}
+                     />
+                     <Tooltip />
+                     <Bar dataKey="salary">
+                        {chartData.map((entry, index) => (
+                           <Cell
+                              key={`cell-${index}`}
+                              fill={barColors[index % barColors.length]}
+                           />
+                        ))}
+                     </Bar>
+                  </BarChart>
+               </ResponsiveContainer>
+            )}
          </div>
       </div>
    );
