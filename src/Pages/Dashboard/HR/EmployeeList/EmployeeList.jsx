@@ -123,6 +123,7 @@ const EmployeeList = () => {
                onClose={closePayModal}
                onPay={handlePay}
                employee={selectedEmployee}
+               refetch={refetch}
             />
          )}
       </div>

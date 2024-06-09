@@ -1,7 +1,15 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+// stripe (1)
+import { loadStripe } from "@stripe/stripe-js";
+// stripe (3)
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "../../Form/CheckoutForm";
 
-const PayEmployeeModal = ({ isOpen, onClose, onPay, employee }) => {
+// make stripe promise, stripe (2)
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
+const PayEmployeeModal = ({ isOpen, onClose, onPay, employee, refetch }) => {
    const [month, setMonth] = useState("");
    const [year, setYear] = useState("");
    const [error, setError] = useState("");
@@ -33,7 +41,7 @@ const PayEmployeeModal = ({ isOpen, onClose, onPay, employee }) => {
 
    return (
       <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full items-center justify-center flex flex-col z-50">
-         <div className="relative mx-auto p-5 border max-w-[500px] shadow-lg bg-white">
+         <div className="relative mx-auto p-5 border w-11/12 md:w-1/3 max-w-[800px] shadow-lg bg-white">
             <div className="mt-3 text-center">
                <h3 className="text-lg leading-6 font-medium text-gray-900 uppercase tracking-widest">
                   Pay Employee
@@ -67,23 +75,19 @@ const PayEmployeeModal = ({ isOpen, onClose, onPay, employee }) => {
                   </div>
                   {error && <p className="text-red-500 mt-2">{error}</p>}
                </div>
-               <div className="flex items-center px-4 py-3">
-                  <button
-                     className={`w-full px-5 py-2 relative bg-ourPrimary group overflow-hidden font-medium text-white border-2 border-ourPrimary mr-2 hover:border-ourPrimary hover:bg-white hover:text-ourPrimary flex justify-center items-center duration-300 tracking-widest ${
-                        !month || !year ? "opacity-50 cursor-not-allowed" : ""
-                     }`}
-                     onClick={handlePay}
-                     disabled={!month || !year}
-                  >
-                     PAY
-                  </button>
-                  <button
-                     className="w-full px-5 py-2 relative bg-ourAsh group overflow-hidden font-medium text-white border-2 border-ourAsh mr-2 hover:border-ourAsh hover:bg-white hover:text-ourAsh flex justify-center items-center duration-300 tracking-widest"
-                     onClick={onClose}
-                  >
-                     CANCEL
-                  </button>
-               </div>
+               {/* promise ta elements e pass korbo, stripe (4) */}
+               <Elements stripe={stripePromise}>
+                  {/* checkout form */}
+
+                  <CheckoutForm
+                     month={month}
+                     year={year}
+                     handlePay={handlePay}
+                     onClose={onClose}
+                     employee={employee}
+                     refetch={refetch}
+                  />
+               </Elements>
             </div>
          </div>
       </div>
@@ -94,6 +98,7 @@ PayEmployeeModal.propTypes = {
    isOpen: PropTypes.bool.isRequired,
    onClose: PropTypes.func.isRequired,
    onPay: PropTypes.func.isRequired,
+   refetch: PropTypes.func.isRequired,
    employee: PropTypes.object.isRequired,
 };
 
