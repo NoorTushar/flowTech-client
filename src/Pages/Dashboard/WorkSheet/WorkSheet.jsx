@@ -1,4 +1,3 @@
-import Title from "../../../Components/Shared/Title/Title";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -61,24 +60,20 @@ const WorkSheet = () => {
 
    return (
       <div className="">
-         <Title
-            title={"Worksheet"}
-            titleColor={"#F86244"}
-            textAlign={"center"}
-         />
+         <h2 className="dashboard-title">Worksheet</h2>
 
          {/* Task Form */}
          <form onSubmit={handleAddWork} className=" max-w-[1100px] mx-auto">
-            <h2 className="text-center uppercase tracking-widest text-2xl mb-2">
+            <h2 className="text-center uppercase tracking-widest text-2xl mb-2 text-ourAsh">
                Enter work data
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 items-center  gap-4 p-4 text-lg">
-               <div className="flex items-center gap-2 border p-2">
-                  <label className="w-full whitespace-nowrap text-xl uppercase tracking-wider text-ourPrimary">
+               <div className="flex items-center gap-2  p-2">
+                  <label className="w-full whitespace-nowrap text-xl uppercase tracking-wider text-ourAsh">
                      Select Task:{" "}
                   </label>
                   <select
-                     className=" outline-none font-didact w-full"
+                     className="outline-none font-didact w-full bg-ourLighterBlack text-white p-2"
                      required
                      name="task"
                      defaultValue=""
@@ -90,24 +85,24 @@ const WorkSheet = () => {
                      <option value="paper-work">Paper-work</option>
                   </select>
                </div>
-               <div className="flex items-center gap-2 border p-2">
-                  <label className="text-xl uppercase tracking-wider text-ourPrimary">
+               <div className="flex items-center gap-2  p-2">
+                  <label className="text-xl uppercase tracking-wider text-ourAsh">
                      Hours:{" "}
                   </label>
                   <input
                      name="workHours"
-                     type="number"
+                     type="text"
                      placeholder="hours"
                      required
-                     className=" rounded-none outline-none max-w-20 "
+                     className=" rounded-none outline-none max-w-20 bg-ourLighterBlack text-white p-2"
                   />
                </div>
-               <div className="flex items-center gap-2 border p-2">
-                  <label className="text-xl uppercase tracking-wider text-ourPrimary">
+               <div className="flex items-center gap-2  p-2">
+                  <label className="text-xl uppercase tracking-wider text-ourAsh">
                      Date:{" "}
                   </label>
                   <DatePicker
-                     className="outline-none"
+                     className="outline-none p-2 bg-ourLighterBlack text-ourAsh"
                      selected={startDate}
                      name="workDate"
                      onChange={(date) => setStartDate(date)}

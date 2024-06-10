@@ -4,13 +4,13 @@ import { format } from "date-fns";
 const WorkSheetTable = ({ works }) => {
    return (
       <div className="overflow-x-auto max-w-[800px] mx-auto  my-10">
-         <h2 className="text-center uppercase tracking-widest text-2xl mb-2">
+         <h2 className="text-center uppercase tracking-widest text-2xl mb-2 text-ourAsh">
             Your Work History
          </h2>
-         <table className="table table-zebra">
+         <table className="table">
             {/* head */}
             <thead>
-               <tr className="*:tracking-wider uppercase text-base text-ourPrimary">
+               <tr className="text-ourPrimary *:p-6">
                   <th>#</th>
                   <th>Task</th>
                   <th>Hours</th>
@@ -19,8 +19,8 @@ const WorkSheetTable = ({ works }) => {
             </thead>
             <tbody className="font-didact">
                {works.map((work, index) => (
-                  <tr key={work._id}>
-                     <th>{index + 1}</th>
+                  <tr key={work._id} className="*:px-6 *:py-3">
+                     <th className="text-ourAsh">{index + 1}</th>
                      <td>{work.task}</td>
                      <td>{work.workHours}</td>
                      <td>{format(new Date(work.workDate), "yyyy-MM-dd")}</td>

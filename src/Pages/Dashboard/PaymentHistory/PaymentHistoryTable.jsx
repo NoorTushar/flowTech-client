@@ -65,10 +65,12 @@ const PaymentHistoryTable = ({ payments }) => {
 
    return (
       <div>
-         <div>
+         <div className="flex items-center gap-2 mb-6">
+            <p className="text-white">Filter:</p>
             <input
                type="text"
-               className="border rounded-none p-2"
+               placeholder="Filter anything"
+               className="rounded-none p-2 bg-ourLighterBlack text-white outline-none"
                value={filtering}
                onChange={(e) => setFiltering(e.target.value)}
             />
@@ -117,53 +119,58 @@ const PaymentHistoryTable = ({ payments }) => {
          {/* Pagination Buttons */}
          <div className="flex items-center gap-2 flex-wrap text-ourAsh my-4">
             <button
-               className="border p-2 "
                onClick={() => table.setPageIndex(0)}
+               className="p-2 relative group overflow-hidden  bg-transparent text-ourPrimary inline-block custom-next border-ourPrimary border hover:border-white"
             >
-               First page
+               <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-90"></span>
+               <span className="relative group-hover:text-ourPrimary">
+                  FIRST PAGE
+               </span>
             </button>
-
             <button
                disabled={!table.getCanPreviousPage()}
                onClick={() => table.previousPage()}
-               className="p-2 relative group overflow-hidden font-medium bg-transparent text-ourPrimary inline-block custom-next border-ourPrimary border hover:border-white"
+               className="p-2 relative group overflow-hidden  bg-transparent text-ourPrimary inline-block custom-next border-ourPrimary border hover:border-white"
             >
                <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-90"></span>
                <span className="relative group-hover:text-ourPrimary">
                   <GrFormPreviousLink className="text-2xl" />
                </span>
             </button>
-
             {/* Next Page Button */}
             <button
                disabled={!table.getCanNextPage()}
                onClick={() => table.nextPage()}
-               className="p-2  relative group overflow-hidden font-medium bg-transparent text-ourPrimary inline-block custom-next border-ourPrimary border hover:border-white"
+               className="p-2  relative group overflow-hidden  bg-transparent text-ourPrimary inline-block custom-next border-ourPrimary border hover:border-white"
             >
                <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-90"></span>
                <span className="relative group-hover:text-ourPrimary">
                   <GrFormNextLink className="text-2xl" />
                </span>
             </button>
+
             <button
-               className="border p-2 "
                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+               className="p-2 relative group overflow-hidden  bg-transparent text-ourPrimary inline-block custom-next border-ourPrimary border hover:border-white"
             >
-               Last page
+               <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-90"></span>
+               <span className="relative group-hover:text-ourPrimary">
+                  Last PAGE
+               </span>
             </button>
             {/* Pagination Status and Page Size Selector */}
-            <div>
-               <span>
-                  Page{" "}
-                  <strong>
+            <div className="flex items-center flex-wrap gap-2">
+               <h2>
+                  Page:{" "}
+                  <span className="text-ourPrimary ">
                      {table.getState().pagination.pageIndex + 1} of{" "}
                      {table.getPageCount()}
-                  </strong>{" "}
-               </span>
-               <span>
+                  </span>{" "}
+               </h2>
+               <h3>
                   | Go to page:{" "}
                   <input
-                     type="number"
+                     type="text"
                      defaultValue={table.getState().pagination.pageIndex + 1}
                      onChange={(e) => {
                         const page = e.target.value
@@ -171,10 +178,12 @@ const PaymentHistoryTable = ({ payments }) => {
                            : 0;
                         table.setPageIndex(page);
                      }}
-                     style={{ width: "100px" }}
+                     style={{ width: "60px" }}
+                     className="rounded-none p-2 bg-ourLighterBlack text-white outline-none"
                   />
-               </span>
+               </h3>
                <select
+                  className="rounded-none p-2 bg-ourLighterBlack text-ourAsh outline-none"
                   value={table.getState().pagination.pageSize}
                   onChange={(e) => {
                      table.setPageSize(Number(e.target.value));
