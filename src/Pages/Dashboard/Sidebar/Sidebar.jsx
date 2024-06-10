@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GrLogout } from "react-icons/gr";
-import { FcSettings } from "react-icons/fc";
+import { FcHome } from "react-icons/fc";
 
 import logo from "../../../assets/FlowTech-Logo.png";
 
@@ -15,7 +15,8 @@ import AdminMenu from "../../../Components/Dashboard/Sidebar/AdminMenu/AdminMenu
 import LoadingSpinner from "../../../Components/Shared/LoadingSpinner";
 
 const Sidebar = ({ role, isLoading }) => {
-   const { logOut } = useAuth();
+   const { logoutUser } = useAuth();
+
    const [isActive, setActive] = useState(false);
 
    if (isLoading) return <LoadingSpinner />;
@@ -27,7 +28,7 @@ const Sidebar = ({ role, isLoading }) => {
    return (
       <>
          {/* Small Screen Navbar */}
-         <div className="bg-red-500 bg-ourLighterBlack text-gray-800 flex justify-between lg:hidden">
+         <div className=" bg-ourLighterBlack text-gray-800 flex justify-between lg:hidden">
             <div>
                <div className="block cursor-pointer p-4 font-bold">
                   <Link to="/">
@@ -51,7 +52,7 @@ const Sidebar = ({ role, isLoading }) => {
 
          {/* Sidebar */}
          <div
-            className={`z-10 lg:fixed flex flex-col justify-between overflow-x-hidden bg-purple-900 bg-ourLighterBlack w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+            className={`z-10 lg:fixed flex flex-col justify-between overflow-x-hidden  bg-ourLighterBlack w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
                isActive && "-translate-x-full"
             }  lg:translate-x-0  transition duration-200 ease-in-out`}
          >
@@ -92,7 +93,7 @@ const Sidebar = ({ role, isLoading }) => {
 
                {/* Profile Menu */}
                <NavLink
-                  to="/dashboard/profile"
+                  to="/"
                   className={({ isActive }) =>
                      `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
                         isActive
@@ -101,12 +102,12 @@ const Sidebar = ({ role, isLoading }) => {
                      }`
                   }
                >
-                  <FcSettings className="w-5 h-5" />
+                  <FcHome className="w-5 h-5" />
 
-                  <span className="mx-4 font-medium">Profile</span>
+                  <span className="mx-4 font-medium">Home Page</span>
                </NavLink>
                <button
-                  onClick={logOut}
+                  onClick={logoutUser}
                   className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform"
                >
                   <GrLogout className="w-5 h-5" />
