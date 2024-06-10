@@ -4,7 +4,8 @@ import ServiceSection from "../../../Components/ServiceSection/ServiceSection";
 import VerticalSectionLine from "../../../Components/Shared/VerticalSectionLine/VerticalSectionLine";
 import AboutUs from "../AboutUs/AboutUs";
 import TestimonialSection from "../TestimonialSection/TestimonialSection";
-import TestiBg from "../TestimonialSection/testi-bg.jpg";
+import TestiBg from "../TestimonialSection/testi-flowtech.jpg";
+import TeamsSection from "../TeamsSection/TeamsSection";
 
 const Home = () => {
    return (
@@ -22,6 +23,11 @@ const Home = () => {
          {/* Services */}
          <section className="bg-ourBlack py-[60px] md:py-[100px] relative">
             <ServiceSection />
+            <VerticalSectionLine />
+         </section>
+         {/* Teams */}
+         <section className="bg-ourLighterBlack py-[60px] md:py-[100px] relative">
+            <TeamsSection />
             <VerticalSectionLine />
          </section>
          {/* Testimonials */}
