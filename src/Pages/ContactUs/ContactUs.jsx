@@ -72,7 +72,7 @@ const ContactUs = () => {
                      required
                      name="email"
                      type="email"
-                     className="w-full p-3  bg-ourLighterBlack border-b border-ourAsh focus:border-ourPrimary  outline-none "
+                     className="w-full p-3  bg-ourLighterBlack   outline-none "
                   />
                </div>
                <div className="space-y-2">
@@ -83,14 +83,14 @@ const ContactUs = () => {
                      required
                      name="message"
                      rows="5"
-                     className="w-full p-3  bg-ourLighterBlack border-b border-ourAsh focus:border-ourPrimary outline-none"
+                     className="w-full p-3  bg-ourLighterBlack  outline-none"
                      draggable="false"
                   ></textarea>
                </div>
                <button
                   disabled={mloading}
                   type="submit"
-                  className="w-full px-5 py-2 relative bg-ourPrimary group  overflow-hidden font-medium text-white border-2 border-ourPrimary mr-2 hover:border-white hover:text-ourPrimary flex justify-center items-center"
+                  className="w-1/2 px-5 py-2 relative bg-ourPrimary group  overflow-hidden font-medium text-white border-2 border-ourPrimary mr-2 hover:border-white hover:text-ourPrimary flex justify-center items-center"
                >
                   <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full"></span>
 
