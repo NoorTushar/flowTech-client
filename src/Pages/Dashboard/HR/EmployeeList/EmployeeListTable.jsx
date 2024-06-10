@@ -8,7 +8,7 @@ const EmployeeListTable = ({ employees, openModal, openPayModal }) => {
       <div className="overflow-x-auto md:max-w-[950px] lg:max-w-[700px] mx-auto my-10">
          <table className="table">
             <thead>
-               <tr className="uppercase text-base text-ourPrimary text-center">
+               <tr className="uppercase text-base text-ourPrimary text-center *:p-6">
                   <th>#</th>
                   <th>Name</th>
                   <th>Email</th>
@@ -21,7 +21,7 @@ const EmployeeListTable = ({ employees, openModal, openPayModal }) => {
             </thead>
             <tbody className="font-didact">
                {employees.map((employee, index) => (
-                  <tr key={employee._id}>
+                  <tr key={employee._id} className="*:px-6 *:py-3">
                      <th className="text-ourAsh">{index + 1}</th>
                      <td className="whitespace-nowrap">{employee?.userName}</td>
                      <td>{employee?.email}</td>

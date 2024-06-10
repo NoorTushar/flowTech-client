@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import Title from "../../../../Components/Shared/Title/Title";
 import useEmployees from "../../../../Hooks/useEmployees";
 import EmployeeListTable from "./EmployeeListTable";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
@@ -98,11 +97,7 @@ const EmployeeList = () => {
 
    return (
       <div>
-         <Title
-            title={"Employee List"}
-            titleColor={"#F86244"}
-            textAlign={"center"}
-         />
+         <h2 className="dashboard-title">Employee List</h2>
          <EmployeeListTable
             employees={employees}
             openModal={openModal}

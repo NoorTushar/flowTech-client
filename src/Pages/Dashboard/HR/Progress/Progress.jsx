@@ -1,6 +1,5 @@
 import { format } from "date-fns";
 import LoadingSpinner from "../../../../Components/Shared/LoadingSpinner";
-import Title from "../../../../Components/Shared/Title/Title";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
@@ -109,19 +108,17 @@ const Progress = () => {
 
    return (
       <div>
-         <Title
-            title={"employee progress"}
-            titleColor={"black"}
-            textAlign={"center"}
-         />
+         <h2 className="dashboard-title">employee progress</h2>
          {/* Filter Fields */}
          <div>
             {/* Select Name */}
-            <div>
+            <div className="flex items-center gap-2">
+               <p className="text-ourAsh">Filter by Name: </p>
                <select
                   name="filterName"
                   value={currentName}
                   onChange={handleFilterName}
+                  className="outline-none font-didact  bg-ourLighterBlack text-white p-2"
                >
                   <option value="">filter by name</option>
                   {uniqueNames.map((uname, index) => (
@@ -132,30 +129,37 @@ const Progress = () => {
                </select>
             </div>
             {/* Select Month */}
-            <select
-               name="month"
-               value={currentMonth}
-               onChange={handleMonthName}
-            >
-               <option value="">filter by month</option>
-               {months.map((month, index) => (
-                  <option key={index} value={month.code}>
-                     {month.month}
-                  </option>
-               ))}
-            </select>
+            <div className="flex items-center gap-2 my-2">
+               <p className="text-ourAsh">Filter by Month: </p>
+               <select
+                  className="outline-none font-didact  bg-ourLighterBlack text-white p-2"
+                  name="month"
+                  value={currentMonth}
+                  onChange={handleMonthName}
+               >
+                  <option value="">filter by month</option>
+                  {months.map((month, index) => (
+                     <option key={index} value={month.code}>
+                        {month.month}
+                     </option>
+                  ))}
+               </select>
+            </div>
          </div>
          {/* Total Hours Worked */}
          <div>
-            <h3>Total Hours Worked : {totalWorkHours}</h3>
+            <h3 className="text-ourAsh py-2">
+               Total Hours Worked :{" "}
+               <span className="text-ourPrimary">{totalWorkHours}</span>
+            </h3>
          </div>
          {/* Table */}
-         <div>
+         <div className="mt-4">
             <div className="overflow-x-auto">
                <table className="table table-zebra">
                   {/* head */}
-                  <thead>
-                     <tr>
+                  <thead className="text-ourPrimary">
+                     <tr className="*:p-6">
                         <th>#</th>
                         <th>name</th>
                         <th>task</th>
@@ -167,7 +171,7 @@ const Progress = () => {
                   <tbody>
                      {allWorks.length > 0 ? (
                         allWorks.map((work, index) => (
-                           <tr key={work._id}>
+                           <tr key={work._id} className="*:px-6 *:py-3">
                               <td>{index + 1}</td>
                               <td>{work.employeeName}</td>
                               <td>{work.task}</td>
