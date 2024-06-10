@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
-import { LuFileSpreadsheet } from "react-icons/lu";
 
 import logo from "../../../assets/FlowTech-Logo.png";
 
@@ -9,9 +8,10 @@ import { AiOutlineBars } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
-import MenuItem from "../../../Components/Dashboard/Sidebar/MenuItem/MenuItem";
 import EmployeeMenu from "../../../Components/Dashboard/Sidebar/EmployeeMenu/EmployeeMenu";
 import useRole from "../../../Hooks/useRole";
+import HRMenu from "../../../Components/Dashboard/Sidebar/HRMenu/HRMenu";
+import AdminMenu from "../../../Components/Dashboard/Sidebar/AdminMenu/AdminMenu";
 
 const Sidebar = () => {
    const { logOut } = useAuth();
@@ -75,33 +75,12 @@ const Sidebar = () => {
                      {/* Show only if a user is an employee */}
                      {role === "employee" && <EmployeeMenu />}
 
+                     {/* Show only if a user is a HR */}
+                     {role === "hr" && <HRMenu />}
                      {/* Payment History */}
-                     <MenuItem
-                        label={"Employee List"}
-                        icon={LuFileSpreadsheet}
-                        address={"employee-list"}
-                     />
 
-                     {/* Progress */}
-                     <MenuItem
-                        label={"Employee Progress"}
-                        icon={LuFileSpreadsheet}
-                        address={"progress"}
-                     />
-
-                     {/* All Employee List */}
-                     <MenuItem
-                        label={"All Employee List"}
-                        icon={LuFileSpreadsheet}
-                        address={"all-employee-list"}
-                     />
-
-                     {/* All Messages */}
-                     <MenuItem
-                        label={"All Messages"}
-                        icon={LuFileSpreadsheet}
-                        address={"all-messages"}
-                     />
+                     {/* Show only if a user is an admin */}
+                     {role === "admin" && <AdminMenu />}
                   </nav>
                </div>
             </div>

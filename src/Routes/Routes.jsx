@@ -14,6 +14,7 @@ import ContactUs from "../Pages/ContactUs/ContactUs";
 import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList/AllEmployeeList";
 import AllMessages from "../Pages/Dashboard/Admin/AllMessages/AllMessages";
 import EmployeeRoute from "./EmployeeRoute";
+import HRRoute from "./HRRoute";
 
 export const router = createBrowserRouter([
    {
@@ -69,11 +70,14 @@ export const router = createBrowserRouter([
             ),
          },
 
+         // HR Only Routes
          {
             path: "employee-list",
             element: (
                <PrivateRoute>
-                  <EmployeeList />
+                  <HRRoute>
+                     <EmployeeList />
+                  </HRRoute>
                </PrivateRoute>
             ),
          },
@@ -81,7 +85,9 @@ export const router = createBrowserRouter([
             path: "details/:email",
             element: (
                <PrivateRoute>
-                  <Details />
+                  <HRRoute>
+                     <Details />
+                  </HRRoute>
                </PrivateRoute>
             ),
          },
@@ -89,7 +95,9 @@ export const router = createBrowserRouter([
             path: "progress",
             element: (
                <PrivateRoute>
-                  <Progress />
+                  <HRRoute>
+                     <Progress />
+                  </HRRoute>
                </PrivateRoute>
             ),
          },

@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import Title from "../../../../Components/Shared/Title/Title";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import {
@@ -35,7 +34,7 @@ const Details = () => {
          return data;
       },
    });
-
+   console.log(employee);
    console.log(payments);
    // Prepare the data for the chart
    const chartData =
@@ -60,11 +59,7 @@ const Details = () => {
 
    return (
       <div>
-         <Title
-            title={"Employee Details"}
-            titleColor={"#F86244"}
-            textAlign={"center"}
-         />
+         <h2 className="dashboard-title">Employee Details</h2>
 
          <div className="flex justify-center gap-6 items-center">
             <img
@@ -73,13 +68,17 @@ const Details = () => {
                src={employee?.photoURL || employee?.image}
                alt=""
             />
-            <div className="space-y-6">
+            <div className="space-y-6 text-ourAsh">
                <div>
-                  <h3 className="uppercase tracking-wider">Employee Name: </h3>
+                  <h3 className="uppercase tracking-wider text-white">
+                     Employee Name:{" "}
+                  </h3>
                   <p>{employee?.userName}</p>
                </div>
                <div>
-                  <h3 className="uppercase tracking-wider">Designation: </h3>
+                  <h3 className="uppercase tracking-wider text-white">
+                     Designation:{" "}
+                  </h3>
                   <p>{employee?.designation}</p>
                </div>
             </div>

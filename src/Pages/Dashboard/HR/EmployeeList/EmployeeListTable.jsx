@@ -5,24 +5,26 @@ import LinkButton from "../../../../Components/Shared/Button/LinkButton";
 
 const EmployeeListTable = ({ employees, openModal, openPayModal }) => {
    return (
-      <div className="overflow-x-auto max-w-[800px] mx-auto my-10">
-         <table className="table table-zebra">
+      <div className="overflow-x-auto md:max-w-[950px] lg:max-w-[700px] mx-auto my-10">
+         <table className="table">
             <thead>
                <tr className="uppercase text-base text-ourPrimary text-center">
                   <th>#</th>
                   <th>Name</th>
-                  <th>Status</th>
+                  <th>Email</th>
+                  <th>Verified</th>
                   <th>Bank A/C</th>
                   <th>Salary</th>
-                  <th>Action</th>
+                  <th>Pay</th>
                   <th>Details</th>
                </tr>
             </thead>
             <tbody className="font-didact">
                {employees.map((employee, index) => (
                   <tr key={employee._id}>
-                     <th>{index + 1}</th>
-                     <td>{employee?.userName}</td>
+                     <th className="text-ourAsh">{index + 1}</th>
+                     <td className="whitespace-nowrap">{employee?.userName}</td>
+                     <td>{employee?.email}</td>
                      <td>
                         <button onClick={() => openModal(employee)}>
                            {employee?.verified ? (
