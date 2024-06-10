@@ -1,12 +1,15 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../Pages/Dashboard/Sidebar/Sidebar";
+import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
+   const [role, isLoading] = useRole();
+   console.log("user role: ", role);
    return (
       <div className="relative min-h-screen lg:flex">
          {/* sidebar */}
 
-         <Sidebar></Sidebar>
+         <Sidebar role={role} isLoading={isLoading}></Sidebar>
 
          {/* Outlet */}
 

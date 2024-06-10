@@ -9,15 +9,16 @@ import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import EmployeeMenu from "../../../Components/Dashboard/Sidebar/EmployeeMenu/EmployeeMenu";
-import useRole from "../../../Hooks/useRole";
+
 import HRMenu from "../../../Components/Dashboard/Sidebar/HRMenu/HRMenu";
 import AdminMenu from "../../../Components/Dashboard/Sidebar/AdminMenu/AdminMenu";
+import LoadingSpinner from "../../../Components/Shared/LoadingSpinner";
 
-const Sidebar = () => {
+const Sidebar = ({ role, isLoading }) => {
    const { logOut } = useAuth();
    const [isActive, setActive] = useState(false);
-   const [role] = useRole();
 
+   if (isLoading) return <LoadingSpinner />;
    console.log(role);
    // Sidebar Responsive Handler
    const handleToggle = () => {
@@ -26,7 +27,7 @@ const Sidebar = () => {
    return (
       <>
          {/* Small Screen Navbar */}
-         <div className="bg-ourLighterBlack text-gray-800 flex justify-between lg:hidden">
+         <div className="bg-red-500 bg-ourLighterBlack text-gray-800 flex justify-between lg:hidden">
             <div>
                <div className="block cursor-pointer p-4 font-bold">
                   <Link to="/">
@@ -50,7 +51,7 @@ const Sidebar = () => {
 
          {/* Sidebar */}
          <div
-            className={`z-10 lg:fixed flex flex-col justify-between overflow-x-hidden bg-ourLighterBlack w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+            className={`z-10 lg:fixed flex flex-col justify-between overflow-x-hidden bg-purple-900 bg-ourLighterBlack w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
                isActive && "-translate-x-full"
             }  lg:translate-x-0  transition duration-200 ease-in-out`}
          >
@@ -68,21 +69,22 @@ const Sidebar = () => {
                   </div>
                </div>
 
-               {/* Nav Items */}
-               <div className="flex flex-col justify-between flex-1 mt-6">
-                  {/*  Menu Items */}
-                  <nav>
-                     {/* Show only if a user is an employee */}
-                     {role === "employee" && <EmployeeMenu />}
+               {!isLoading && (
+                  <div className="flex flex-col justify-between flex-1 mt-6">
+                     {/*  Menu Items */}
+                     <nav>
+                        {/* Show only if a user is an employee */}
+                        {role === "employee" && <EmployeeMenu />}
 
-                     {/* Show only if a user is a HR */}
-                     {role === "hr" && <HRMenu />}
-                     {/* Payment History */}
+                        {/* Show only if a user is a HR */}
+                        {role === "hr" && <HRMenu />}
+                        {/* Payment History */}
 
-                     {/* Show only if a user is an admin */}
-                     {role === "admin" && <AdminMenu />}
-                  </nav>
-               </div>
+                        {/* Show only if a user is an admin */}
+                        {role === "admin" && <AdminMenu />}
+                     </nav>
+                  </div>
+               )}
             </div>
 
             <div>

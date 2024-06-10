@@ -78,10 +78,10 @@ const Register = () => {
                const result = await axiosPublic.get(
                   `/fired-people/${data.email}`
                );
-               console.log(result);
+               console.log("fire query result: ", result);
                if (result.data.isFired) {
                   toast.error("FAILED: YOU ARE ALREADY FIRED!");
-
+                  console.log("fired user found");
                   navigate(location?.state || "/");
                   setLoading(false);
                   return;
@@ -89,7 +89,8 @@ const Register = () => {
 
                await createUser(data.email, data.password);
                await updateUser(data.userName, res.data.data.display_url);
-
+               const finalResult = await axiosPublic.post("/people", userData);
+               console.log(finalResult.data);
                // have to set loading to false else after
                // redirecting to page, it will keep showing the loader
                setLoading(false);
@@ -116,7 +117,6 @@ const Register = () => {
       try {
          const result = await loginWithGoogle();
          console.log(result.user);
-
          const isFired = await axiosPublic.get(`/fired-people/${result.email}`);
          console.log(isFired);
          if (isFired.data.isFired) {
@@ -137,6 +137,13 @@ const Register = () => {
             designation: "Executive, Sales",
             verified: false,
          };
+
+         const { data } = await axiosPublic.post("/people", userInfo);
+
+         if (data.isFired) {
+            toast.error("FAILED: YOU ARE ALREADY FIRED!");
+            navigate(location?.state || "/");
+         }
 
          console.log(userInfo);
 

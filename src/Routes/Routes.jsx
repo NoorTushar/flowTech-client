@@ -15,6 +15,7 @@ import AllEmployeeList from "../Pages/Dashboard/Admin/AllEmployeeList/AllEmploye
 import AllMessages from "../Pages/Dashboard/Admin/AllMessages/AllMessages";
 import EmployeeRoute from "./EmployeeRoute";
 import HRRoute from "./HRRoute";
+import Dashboard from "../Pages/Dashboard/Dashboard";
 
 export const router = createBrowserRouter([
    {
@@ -47,6 +48,15 @@ export const router = createBrowserRouter([
          </PrivateRoute>
       ),
       children: [
+         {
+            path: "/dashboard",
+            element: (
+               <PrivateRoute>
+                  <Dashboard />
+               </PrivateRoute>
+            ),
+         },
+
          // Employee Only Routes
          {
             path: "work-sheet",
