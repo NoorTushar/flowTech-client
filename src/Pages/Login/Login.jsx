@@ -95,7 +95,7 @@ const Login = () => {
    };
 
    return (
-      <div className="pt-[68px] pb-10 bg-ourLighterBlack">
+      <div className="pt-[68px] pb-10 bg-ourBlack">
          <Helmet>
             <title>Login | FlowTech</title>
          </Helmet>
@@ -110,7 +110,7 @@ const Login = () => {
          </div>
 
          {/* Total Div */}
-         <div className="flex w-full max-w-xl mx-auto overflow-hidden bg-ourLighterBlack lg:max-w-4xl text-white">
+         <div className="flex w-full max-w-xl mx-auto overflow-hidden bg-ourBlack lg:max-w-4xl text-white">
             {/* Left BG Image */}
             <div
                className="hidden bg-cover lg:block lg:w-1/2"
@@ -146,7 +146,7 @@ const Login = () => {
                               message: "Must provide a valid email address",
                            },
                         })}
-                        className="w-full p-3 border-b border-ourAsh bg-ourLighterBlack outline-none duration-300 font-didact focus:border-ourPrimary placeholder:text-ourAsh text-white"
+                        className="w-full p-3   bg-ourLighterBlack outline-none duration-300 font-didact text-white"
                         type="email"
                         name="email"
                         id="email"
@@ -171,7 +171,7 @@ const Login = () => {
                                  message: "Must provide a password.",
                               },
                            })}
-                           className="w-full p-3 border-b border-ourAsh bg-ourLighterBlack outline-none duration-300 font-didact focus:border-ourPrimary placeholder:text-ourAsh text-white"
+                           className="w-full p-3   bg-ourLighterBlack outline-none duration-300 font-didact text-white"
                            // toggle show/ hide password - (3)
                            type={showPassword ? "text" : "password"}
                            name="password"
@@ -202,7 +202,7 @@ const Login = () => {
 
                   <div className="mt-6">
                      {/* login button */}
-                     <button className="px-5 py-2 relative rounded group lightButton overflow-hidden  bg-ourPrimary text-white inline-block w-full border border-ourPrimary hover:border-white hover:text-ourPrimary uppercase tracking-widest ">
+                     <button className="px-5 py-2 relative  group lightButton overflow-hidden  bg-ourPrimary text-white inline-block w-full border border-ourPrimary hover:border-white hover:text-ourPrimary uppercase tracking-widest ">
                         <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full"></span>
                         <span className="relative ">Login</span>
                      </button>

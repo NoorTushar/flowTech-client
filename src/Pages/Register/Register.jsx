@@ -158,7 +158,7 @@ const Register = () => {
                {/* google login */}
                <button
                   onClick={handleLoginWithGoogle}
-                  className="flex items-center mx-auto justify-center mt-4 text-white transition-colors duration-300 transform border   hover:bg-gray-50 hover:text-ourPrimary  min-w-60 w-1/3 my-6"
+                  className="flex items-center mx-auto justify-center mt-4 transition-colors duration-300 transform border border-ourAsh hover:border-ourPrimary  hover:bg-ourPrimary  min-w-60 w-1/3 my-6 text-white "
                >
                   <div className="px-4 py-2">
                      <FcGoogle className="text-2xl" />
