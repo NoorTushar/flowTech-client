@@ -19,6 +19,10 @@ const PaymentHistoryTable = ({ payments }) => {
 
    const columns = [
       {
+         header: "Transaction ID",
+         accessorKey: "transactionId",
+      },
+      {
          header: "Month",
          accessorKey: "month",
       },
