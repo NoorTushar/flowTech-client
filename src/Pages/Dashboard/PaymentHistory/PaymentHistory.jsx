@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Components/Shared/LoadingSpinner";
-import Title from "../../../Components/Shared/Title/Title";
 import PaymentHistoryTable from "./PaymentHistoryTable";
 
 const PaymentHistory = () => {
@@ -33,13 +32,7 @@ const PaymentHistory = () => {
 
    return (
       <div>
-         <div>
-            <Title
-               title={"Payment History"}
-               textAlign={"center"}
-               titleColor={"black"}
-            />
-         </div>
+         <h2 className="dashboard-title">Payment History</h2>
 
          {/* table */}
          <PaymentHistoryTable payments={payments} />

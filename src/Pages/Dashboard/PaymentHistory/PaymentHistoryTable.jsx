@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import { GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
 
 const PaymentHistoryTable = ({ payments }) => {
    const data = useMemo(() => payments, [payments]);
@@ -26,12 +27,12 @@ const PaymentHistoryTable = ({ payments }) => {
          accessorKey: "year",
       },
       {
-         header: "Salary",
+         header: "Amount",
          accessorKey: "salary",
       },
       {
-         header: "Demo Date",
-         accessorKey: "demoDate(delete)",
+         header: "Pay Date",
+         accessorKey: "date",
          cell: (info) => {
             const date = new Date(info.getValue());
             return date.toLocaleDateString();
@@ -64,21 +65,22 @@ const PaymentHistoryTable = ({ payments }) => {
 
    return (
       <div>
-         <h3>Basic Table</h3>
-         <div className="max-w-[600px] mx-auto">
+         <div>
             <input
                type="text"
                className="border rounded-none p-2"
                value={filtering}
                onChange={(e) => setFiltering(e.target.value)}
             />
-            <table>
-               <thead>
+         </div>
+         <div className="overflow-x-auto">
+            <table className="table border">
+               <thead className="text-ourPrimary bg-ourLighterBlack">
                   {table.getHeaderGroups().map((headerGroup) => (
-                     <tr key={headerGroup.id}>
+                     <tr key={headerGroup.id} className="*:p-6">
                         {headerGroup.headers.map((header) => (
                            <th
-                              className="border p-2"
+                              className=""
                               key={header.id}
                               onClick={header.column.getToggleSortingHandler()}
                            >
@@ -96,11 +98,11 @@ const PaymentHistoryTable = ({ payments }) => {
                      </tr>
                   ))}
                </thead>
-               <tbody>
+               <tbody className="bg-ourLighterBlack">
                   {table.getRowModel().rows.map((row) => (
-                     <tr key={row.id}>
+                     <tr key={row.id} className="text-ourAsh *:px-6 *:py-3">
                         {row.getVisibleCells().map((cell) => (
-                           <td className="border p-2" key={cell.id}>
+                           <td className="" key={cell.id}>
                               {flexRender(
                                  cell.column.columnDef.cell,
                                  cell.getContext()
@@ -111,70 +113,79 @@ const PaymentHistoryTable = ({ payments }) => {
                   ))}
                </tbody>
             </table>
-            <div>
-               <button
-                  className="border p-2 border-black"
-                  onClick={() => table.setPageIndex(0)}
-               >
-                  First page
-               </button>
-               <button
-                  className="border p-2 border-black"
-                  disabled={!table.getCanPreviousPage()}
-                  onClick={() => table.previousPage()}
-               >
-                  Previous page
-               </button>
-               <button
-                  className="border p-2 border-black"
-                  disabled={!table.getCanNextPage()}
-                  onClick={() => table.nextPage()}
-               >
-                  Next page
-               </button>
-               <button
-                  className="border p-2 border-black"
-                  onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-               >
-                  Last page
-               </button>
+         </div>
+         {/* Pagination Buttons */}
+         <div className="flex items-center gap-2 flex-wrap text-ourAsh my-4">
+            <button
+               className="border p-2 "
+               onClick={() => table.setPageIndex(0)}
+            >
+               First page
+            </button>
 
-               {/* Pagination Status and Page Size Selector */}
-               <div>
-                  <span>
-                     Page{" "}
-                     <strong>
-                        {table.getState().pagination.pageIndex + 1} of{" "}
-                        {table.getPageCount()}
-                     </strong>{" "}
-                  </span>
-                  <span>
-                     | Go to page:{" "}
-                     <input
-                        type="number"
-                        defaultValue={table.getState().pagination.pageIndex + 1}
-                        onChange={(e) => {
-                           const page = e.target.value
-                              ? Number(e.target.value) - 1
-                              : 0;
-                           table.setPageIndex(page);
-                        }}
-                        style={{ width: "100px" }}
-                     />
-                  </span>
-                  <select
-                     value={table.getState().pagination.pageSize}
+            <button
+               disabled={!table.getCanPreviousPage()}
+               onClick={() => table.previousPage()}
+               className="p-2 relative group overflow-hidden font-medium bg-transparent text-ourPrimary inline-block custom-next border-ourPrimary border hover:border-white"
+            >
+               <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-90"></span>
+               <span className="relative group-hover:text-ourPrimary">
+                  <GrFormPreviousLink className="text-2xl" />
+               </span>
+            </button>
+
+            {/* Next Page Button */}
+            <button
+               disabled={!table.getCanNextPage()}
+               onClick={() => table.nextPage()}
+               className="p-2  relative group overflow-hidden font-medium bg-transparent text-ourPrimary inline-block custom-next border-ourPrimary border hover:border-white"
+            >
+               <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-90"></span>
+               <span className="relative group-hover:text-ourPrimary">
+                  <GrFormNextLink className="text-2xl" />
+               </span>
+            </button>
+            <button
+               className="border p-2 "
+               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+            >
+               Last page
+            </button>
+            {/* Pagination Status and Page Size Selector */}
+            <div>
+               <span>
+                  Page{" "}
+                  <strong>
+                     {table.getState().pagination.pageIndex + 1} of{" "}
+                     {table.getPageCount()}
+                  </strong>{" "}
+               </span>
+               <span>
+                  | Go to page:{" "}
+                  <input
+                     type="number"
+                     defaultValue={table.getState().pagination.pageIndex + 1}
                      onChange={(e) => {
-                        table.setPageSize(Number(e.target.value));
+                        const page = e.target.value
+                           ? Number(e.target.value) - 1
+                           : 0;
+                        table.setPageIndex(page);
                      }}
-                  >
-                     {[5, 10, 20, 50].map((pageSize) => (
-                        <option key={pageSize} value={pageSize}>
-                           Show {pageSize}
-                        </option>
-                     ))}
-                  </select>
-               </div>
+                     style={{ width: "100px" }}
+                  />
+               </span>
+               <select
+                  value={table.getState().pagination.pageSize}
+                  onChange={(e) => {
+                     table.setPageSize(Number(e.target.value));
+                  }}
+               >
+                  {[5, 10, 20, 50].map((pageSize) => (
+                     <option key={pageSize} value={pageSize}>
+                        Show {pageSize}
+                     </option>
+                  ))}
+               </select>
             </div>
          </div>
       </div>
