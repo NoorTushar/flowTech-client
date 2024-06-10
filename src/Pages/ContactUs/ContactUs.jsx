@@ -72,7 +72,7 @@ const ContactUs = () => {
                      required
                      name="email"
                      type="email"
-                     className="w-full p-3  bg-ourLighterBlack   outline-none "
+                     className="w-full p-3  bg-ourLighterBlack   outline-none font-didact "
                   />
                </div>
                <div className="space-y-2">
@@ -83,7 +83,7 @@ const ContactUs = () => {
                      required
                      name="message"
                      rows="5"
-                     className="w-full p-3  bg-ourLighterBlack  outline-none"
+                     className="w-full p-3  bg-ourLighterBlack  outline-none font-didact "
                      draggable="false"
                   ></textarea>
                </div>

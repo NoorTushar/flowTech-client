@@ -146,37 +146,37 @@ const Register = () => {
          ></Title>
 
          {/* form */}
-         <div className="flex w-full  mx-auto overflow-hidden bg-white rounded-lg shadow-lg  ">
+         <div className="flex w-full  mx-auto overflow-hidden bg-ourBlack rounded-lg shadow-lg  ">
             {/* Left Container */}
             <div className="w-full px-6 py-8 md:px-8 lg:w-2/3">
-               <div className="flex justify-center mx-auto">
+               <div className="flex justify-center  mx-auto">
                   <img className="w-auto h-7 sm:h-8" src={logo} alt="" />
                </div>
 
-               <p className="mt-3 text-xl text-center text-black ">Welcome!</p>
+               <p className="mt-3 text-xl text-center text-white ">Welcome!</p>
 
                {/* google login */}
                <button
                   onClick={handleLoginWithGoogle}
-                  className="flex items-center justify-center mt-4 text-black transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50  w-full"
+                  className="flex items-center mx-auto justify-center mt-4 text-white transition-colors duration-300 transform border   hover:bg-gray-50 hover:text-ourPrimary  min-w-60 w-1/3 my-6"
                >
                   <div className="px-4 py-2">
                      <FcGoogle className="text-2xl" />
                   </div>
 
-                  <span className="w-5/6 px-4 py-3 font-bold text-center">
-                     Sign in with Google
+                  <span className="w-5/6 px-4 py-3  text-center whitespace-nowrap">
+                     Sign up with Google
                   </span>
                </button>
 
-               <div className="flex items-center justify-between my-4">
-                  <span className="w-1/5 border-b lg:w-1/4"></span>
+               <div className="flex items-center justify-between my-8">
+                  <span className="w-1/5 border-b  border-b-ourAsh  md:w-1/5"></span>
 
-                  <p className="text-xs text-center text-black uppercase  ">
-                     register your free account
+                  <p to={"/login"} className="text text-ourAsh uppercase  ">
+                     or register your free account
                   </p>
 
-                  <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
+                  <span className="w-1/5 border-b border-b-ourAsh  md:w-1/5"></span>
                </div>
 
                {/* // React-Hook-Form:  */}
@@ -194,7 +194,7 @@ const Register = () => {
                               message: "Must provide a username.",
                            },
                         })}
-                        className="w-full p-3 border-b border-ourAsh bg-ourLighterBlack outline-none duration-300 font-didact focus:border-ourPrimary placeholder:text-ourAsh text-white"
+                        className="w-full p-3  bg-ourLighterBlack outline-none duration-300 font-didact text-white"
                         type="text"
                         name="userName"
                         placeholder="User name"
@@ -221,7 +221,7 @@ const Register = () => {
                               message: "Must provide a valid email address",
                            },
                         })}
-                        className="w-full p-3 border-b border-ourAsh bg-ourLighterBlack outline-none duration-300 font-didact focus:border-ourPrimary placeholder:text-ourAsh text-white"
+                        className="w-full p-3   bg-ourLighterBlack outline-none duration-300 font-didact text-white"
                         type="email"
                         name="email"
                         id="email"
@@ -259,7 +259,7 @@ const Register = () => {
                                     "Password must have at least one special character.",
                               },
                            })}
-                           className="w-full p-3 border-b border-ourAsh bg-ourLighterBlack outline-none duration-300 font-didact focus:border-ourPrimary placeholder:text-ourAsh text-white"
+                           className="w-full p-3   bg-ourLighterBlack outline-none duration-300 font-didact text-white"
                            // toggle show/ hide password - (3)
                            type={showPassword ? "text" : "password"}
                            name="password"
@@ -308,7 +308,7 @@ const Register = () => {
                               message: "Must provide an image.",
                            },
                         })}
-                        className="w-full p-3 border-b border-ourAsh bg-ourLighterBlack outline-none duration-300 font-didact focus:border-ourPrimary placeholder:text-ourAsh text-white"
+                        className="w-full p-3   bg-ourLighterBlack outline-none duration-300 font-didact text-white"
                         type="file"
                         placeholder="Image"
                      />
@@ -330,7 +330,7 @@ const Register = () => {
                            validate: (value) =>
                               value !== "" || "Must select a valid role.",
                         })}
-                        className="w-full p-3 border-b border-ourAsh bg-ourLighterBlack outline-none duration-300 font-didact focus:border-ourPrimary placeholder:text-ourAsh text-white"
+                        className="w-full p-3   bg-ourLighterBlack outline-none duration-300 font-didact text-white"
                         defaultValue="" // Set the default value to an empty string
                      >
                         <option value="" disabled>
@@ -356,7 +356,7 @@ const Register = () => {
                               message: "Must provide a salary.",
                            },
                         })}
-                        className="w-full p-3 border-b border-ourAsh bg-ourLighterBlack outline-none duration-300 font-didact focus:border-ourPrimary placeholder:text-ourAsh text-white"
+                        className="w-full p-3   bg-ourLighterBlack outline-none duration-300 font-didact text-white"
                         type="number"
                         placeholder="Salary in $"
                      />
@@ -377,7 +377,7 @@ const Register = () => {
                               message: "Must provide a bank account number.",
                            },
                         })}
-                        className="w-full p-3 border-b border-ourAsh bg-ourLighterBlack outline-none duration-300 font-didact focus:border-ourPrimary placeholder:text-ourAsh text-white"
+                        className="w-full p-3   bg-ourLighterBlack outline-none duration-300 font-didact text-white"
                         type="number"
                         placeholder="Bank Account Number"
                      />
@@ -400,7 +400,7 @@ const Register = () => {
                               value !== "" ||
                               "Must select a valid designation.",
                         })}
-                        className="w-full p-3 border-b border-ourAsh bg-ourLighterBlack outline-none duration-300 font-didact focus:border-ourPrimary placeholder:text-ourAsh text-white"
+                        className="w-full p-3   bg-ourLighterBlack outline-none duration-300 font-didact text-white"
                         defaultValue="" // Set the default value to an empty string
                      >
                         <option value="" disabled>
@@ -443,9 +443,9 @@ const Register = () => {
                      )}
                   </div>
 
-                  <div className="mt-6 col-span-2">
+                  <div className="mt-6 col-span-2 text-center flex justify-center">
                      {/* login button */}
-                     <button className="px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack inline-block w-full border border-ourOrange">
+                     <button className="min-w-40 w-1/3 px-5 py-2 relative bg-ourPrimary group  overflow-hidden font-medium text-white border-2 border-ourPrimary mr-2 hover:border-white hover:text-ourPrimary flex justify-center items-center">
                         <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full "></span>
                         <span className="relative ">Register</span>
                      </button>
@@ -453,16 +453,16 @@ const Register = () => {
                </form>
 
                <div className="flex items-center justify-between mt-4">
-                  <span className="w-1/5 border-b md:w-1/4"></span>
+                  <span className="w-1/5 border-b  border-b-ourAsh  md:w-1/5"></span>
 
                   <Link
                      to={"/login"}
-                     className="text-xs text-black uppercase  hover:underline"
+                     className="text text-ourAsh uppercase  hover:underline"
                   >
                      or login
                   </Link>
 
-                  <span className="w-1/5 border-b md:w-1/4"></span>
+                  <span className="w-1/5 border-b border-b-ourAsh  md:w-1/5"></span>
                </div>
             </div>
 
