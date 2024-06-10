@@ -17,7 +17,7 @@ const Login = () => {
    const axiosPublic = useAxiosPublic();
    // toggle show/ hide password - (1)
    const [showPassword, setShowPassword] = useState(false);
-   const { loginWithGoogle, loginUser } = useAuth();
+   const { loginWithGoogle, loginUser, setLoading, logoutUser } = useAuth();
 
    // after login correct redirection (3)
    // first we will get the location of the current page
@@ -43,6 +43,15 @@ const Login = () => {
       console.log(data);
 
       try {
+         const isFired = await axiosPublic.get(`/fired-people/${data.email}`);
+         console.log(isFired);
+         if (isFired.data.isFired) {
+            toast.error("FAILED: YOU ARE ALREADY FIRED!");
+            navigate(location?.state || "/");
+            setLoading(false);
+            return;
+         }
+
          const result = await loginUser(data.email, data.password);
          console.log(result);
          reset();
@@ -67,9 +76,19 @@ const Login = () => {
          const result = await loginWithGoogle();
          console.log(result.user);
 
+         const isFired = await axiosPublic.get(`/fired-people/${result.email}`);
+         console.log(isFired);
+         if (isFired.data.isFired) {
+            toast.error("FAILED: YOU ARE ALREADY FIRED!");
+            navigate(location?.state || "/");
+            logoutUser();
+            setLoading(false);
+            return;
+         }
+
          const userInfo = {
             email: result.user.email,
-            photoURL: result.user.photoURL,
+            image: result.user.photoURL,
             userName: result.user.displayName,
             role: "employee",
             salary: 3000,
@@ -80,7 +99,12 @@ const Login = () => {
 
          console.log(userInfo);
 
-         await axiosPublic.post("/people", userInfo);
+         const { data } = await axiosPublic.post("/people", userInfo);
+
+         if (data.isFired) {
+            toast.error("FAILED: YOU ARE ALREADY FIRED!");
+            navigate(location?.state || "/");
+         }
 
          toast.success("LOGGED IN SUCCESSFULLY");
          navigate(location?.state || "/");

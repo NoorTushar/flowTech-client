@@ -1,10 +1,8 @@
-import { FaCircleCheck } from "react-icons/fa6";
-import { ImCross } from "react-icons/im";
 import FireModal from "../../../../Components/Shared/Modals/FireModal";
 import { useState } from "react";
 import useVerifiedEmployees from "../../../../Hooks/useVerifiedEmployees";
 import MakeHRModal from "../../../../Components/Shared/Modals/MakeHRModal";
-import { RiMedal2Fill } from "react-icons/ri";
+
 import UpdateSalaryModal from "../../../../Components/Shared/Modals/UpdateSalaryModal";
 import { FaTableList } from "react-icons/fa6";
 

@@ -22,7 +22,8 @@ const Register = () => {
    // toggle show/ hide password - (1)
    const [showPassword, setShowPassword] = useState(false);
 
-   const { loginWithGoogle, createUser, updateUser, setLoading } = useAuth();
+   const { loginWithGoogle, createUser, updateUser, setLoading, logoutUser } =
+      useAuth();
 
    // after registration correct redirection - (3)
    const location = useLocation();
@@ -74,11 +75,21 @@ const Register = () => {
          if (confirmationResult.isConfirmed) {
             // create user imported from AuthContext
             try {
+               const result = await axiosPublic.get(
+                  `/fired-people/${data.email}`
+               );
+               console.log(result);
+               if (result.data.isFired) {
+                  toast.error("FAILED: YOU ARE ALREADY FIRED!");
+
+                  navigate(location?.state || "/");
+                  setLoading(false);
+                  return;
+               }
+
                await createUser(data.email, data.password);
                await updateUser(data.userName, res.data.data.display_url);
 
-               const result = await axiosPublic.post("/people", userData);
-               console.log(result.data);
                // have to set loading to false else after
                // redirecting to page, it will keep showing the loader
                setLoading(false);
@@ -106,9 +117,19 @@ const Register = () => {
          const result = await loginWithGoogle();
          console.log(result.user);
 
+         const isFired = await axiosPublic.get(`/fired-people/${result.email}`);
+         console.log(isFired);
+         if (isFired.data.isFired) {
+            toast.error("FAILED: YOU ARE ALREADY FIRED!");
+            navigate(location?.state || "/");
+            logoutUser();
+            setLoading(false);
+            return;
+         }
+
          const userInfo = {
             email: result.user.email,
-            image: result.user.image,
+            image: result.user.photoURL,
             userName: result.user.displayName,
             role: "employee",
             salary: 3000,
@@ -118,8 +139,6 @@ const Register = () => {
          };
 
          console.log(userInfo);
-
-         await axiosPublic.post("/people", userInfo);
 
          toast.success("LOGGED IN SUCCESSFULLY");
          // navigate to private route or homepage
