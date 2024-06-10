@@ -156,7 +156,7 @@ const Progress = () => {
          {/* Table */}
          <div className="mt-4">
             <div className="overflow-x-auto">
-               <table className="table table-zebra">
+               <table className="table">
                   {/* head */}
                   <thead className="text-ourPrimary">
                      <tr className="*:p-6">

@@ -1,5 +1,4 @@
 import { FaCircleCheck } from "react-icons/fa6";
-import Title from "../../../../Components/Shared/Title/Title";
 import { ImCross } from "react-icons/im";
 import FireModal from "../../../../Components/Shared/Modals/FireModal";
 import { useState } from "react";
@@ -52,17 +51,14 @@ const AllEmployeeList = () => {
 
    return (
       <div>
-         <div>
-            <Title
-               title={"all employees"}
-               titleColor={"black"}
-               textAlign={"center"}
-            />
-         </div>
+         <h2 className="dashboard-title">all employees</h2>
 
-         <div className="flex items-center gap-2 text-xl">
-            Change View:
-            <div onClick={() => setTableView(!tableView)}>
+         <div className="flex items-center gap-2 text-xl text-ourAsh">
+            <p>Change View:</p>
+            <div
+               className="text-ourPrimary"
+               onClick={() => setTableView(!tableView)}
+            >
                {tableView ? (
                   <button>
                      <IoGrid />
@@ -76,26 +72,26 @@ const AllEmployeeList = () => {
          </div>
          {/* Table */}
          {tableView && (
-            <div className="w-full max-w-[720px] mx-auto mt-6">
+            <div className="w-full max-w-[720px] mx-auto mt-10">
                <div className="overflow-x-auto">
                   <table className="table">
                      {/* head */}
                      <thead>
-                        <tr>
+                        <tr className="text-ourPrimary *:p-6">
                            <th>#</th>
-                           <th>picture</th>
+                           <th>image</th>
                            <th>name</th>
-                           <th>role</th>
-                           <th>salary</th>
-                           <th>designation</th>
-                           <th>verified</th>
-                           <th>email</th>
+                           <th>Designation</th>
+                           <th>make HR</th>
+                           <th>fire</th>
+                           <th>Salary</th>
+                           <th>update</th>
                         </tr>
                      </thead>
                      <tbody>
                         {verifiedEmployees.length > 0 ? (
                            verifiedEmployees.map((employee, index) => (
-                              <tr key={employee._id}>
+                              <tr key={employee._id} className="*:px-6 *:py-3">
                                  <td>{index + 1}</td>
                                  <td>
                                     <img
@@ -107,16 +103,26 @@ const AllEmployeeList = () => {
                                        alt={employee?.userName}
                                     />
                                  </td>
+                                 <td>{employee?.userName}</td>
+                                 <td>{employee?.designation}</td>
                                  <td className="text-center">
                                     {employee?.role === "hr" ? (
-                                       <RiMedal2Fill className="text-3xl " />
+                                       <button
+                                          disabled={true}
+                                          onClick={() =>
+                                             handleOpenMakeHRModal(employee)
+                                          }
+                                          className="btn btn-sm disabled:bg-ourAsh disabled:text-slate-500 bg-ourBlack text-white rounded-none whitespace-nowrap"
+                                       >
+                                          Already HR
+                                       </button>
                                     ) : (
                                        <button
                                           disabled={employee.role === "fired"}
                                           onClick={() =>
                                              handleOpenMakeHRModal(employee)
                                           }
-                                          className="btn btn-sm bg-ourBlack text-white rounded-none whitespace-nowrap"
+                                          className="btn btn-sm disabled:bg-ourAsh border-transparent disabled:text-slate-500 bg-ourBlack text-white rounded-none whitespace-nowrap"
                                        >
                                           Make HR
                                        </button>
@@ -132,35 +138,25 @@ const AllEmployeeList = () => {
                                           onClick={() =>
                                              handleOpenModal(employee?.email)
                                           }
-                                          className="btn btn-sm bg-ourPrimary text-white rounded-none"
+                                          className="btn btn-sm bg-ourPrimary border-transparent text-white rounded-none"
                                        >
                                           Fire
                                        </button>
                                     )}
                                  </td>
-                                 <td>{employee?.userName}</td>
-                                 <td>{employee?.role}</td>
-                                 <td className="flex items-center gap-4">
-                                    {employee?.salary}{" "}
+
+                                 <td className="">{employee?.salary}</td>
+                                 <td>
                                     <button
                                        disabled={employee.role === "fired"}
                                        onClick={() =>
                                           handleOpenSalaryModal(employee)
                                        }
-                                       className="btn btn-sm bg-ourBlack text-white rounded-none whitespace-nowrap"
+                                       className="btn btn-sm disabled:bg-ourAsh border-transparent disabled:text-slate-500 bg-ourBlack text-white rounded-none whitespace-nowrap"
                                     >
                                        Update Salary
                                     </button>
                                  </td>
-                                 <td>{employee?.designation}</td>
-                                 <td>
-                                    {employee?.verified ? (
-                                       <FaCircleCheck className="text-green-500 text-lg" />
-                                    ) : (
-                                       <ImCross className="text-ourPrimary" />
-                                    )}
-                                 </td>
-                                 <td>{employee?.email}</td>
                               </tr>
                            ))
                         ) : (
@@ -174,24 +170,6 @@ const AllEmployeeList = () => {
                         )}
                      </tbody>
                   </table>
-                  <FireModal
-                     isOpen={isOpen}
-                     handleCloseModal={handleCloseModal}
-                     selectedEmail={selectedEmail}
-                     refetch={refetch}
-                  />
-                  <MakeHRModal
-                     selectForHR={selectForHR}
-                     isHRModalOpen={isHRModalOpen}
-                     handleCloseHRModal={handleCloseHRModal}
-                     refetch={refetch}
-                  />
-                  <UpdateSalaryModal
-                     isUpdateSalaryModalOpen={isUpdateSalaryModalOpen}
-                     selectedForSalaryUpdate={selectedForSalaryUpdate}
-                     handleCloseSalaryModal={handleCloseSalaryModal}
-                     refetch={refetch}
-                  />
                </div>
             </div>
          )}
@@ -203,12 +181,14 @@ const AllEmployeeList = () => {
                   <div
                      key={employee._id}
                      className={`card shadow-xl ${
-                        employee.role === "fired" ? "bg-red-100" : "bg-base-100"
+                        employee.role === "fired"
+                           ? "bg-zinc-500"
+                           : "bg-ourLighterBlack"
                      }`}
                   >
                      <div className="card-body">
                         <div className="flex justify-between">
-                           <div>
+                           <div className="text-ourAsh">
                               <h2 className="card-title">
                                  {employee.userName}
                               </h2>
@@ -223,19 +203,19 @@ const AllEmployeeList = () => {
                            />
                         </div>
 
-                        <p>
-                           <span className="text-ourPrimary">Role:</span>{" "}
+                        <p className="text-ourAsh">
+                           <span className="text-ourAsh">Role:</span>{" "}
                            {employee.role}
                         </p>
-                        <p>
-                           <span className="text-ourPrimary">Salary:</span> $
+                        <p className="text-ourAsh">
+                           <span className="text-ourAsh">Salary:</span> $
                            {employee.salary}
                         </p>
                         <div className="card-actions justify-end">
                            <button
                               disabled={employee.role === "fired"}
                               onClick={() => handleOpenSalaryModal(employee)}
-                              className="btn btn-sm bg-ourBlack text-white rounded-none whitespace-nowrap"
+                              className="btn btn-sm border-none bg-ourBlack text-ourAsh rounded-none whitespace-nowrap"
                            >
                               Update Salary
                            </button>
@@ -244,7 +224,7 @@ const AllEmployeeList = () => {
                               <button
                                  disabled={true}
                                  onClick={() => handleOpenMakeHRModal(employee)}
-                                 className="btn btn-sm bg-ourBlack text-white rounded-none whitespace-nowrap"
+                                 className="btn btn-sm disabled:bg-ourAsh disabled:text-slate-500 bg-ourBlack text-white rounded-none whitespace-nowrap"
                               >
                                  Already HR
                               </button>
@@ -252,7 +232,7 @@ const AllEmployeeList = () => {
                               <button
                                  disabled={employee.role === "fired"}
                                  onClick={() => handleOpenMakeHRModal(employee)}
-                                 className="btn btn-sm bg-ourBlack text-white rounded-none whitespace-nowrap"
+                                 className="btn btn-sm border-transparent bg-ourBlack text-ourAsh rounded-none whitespace-nowrap"
                               >
                                  Make HR
                               </button>
@@ -261,7 +241,7 @@ const AllEmployeeList = () => {
                            {employee.role === "fired" ? (
                               <button
                                  disabled={true}
-                                 className="btn btn-sm bg-ourPrimary text-white rounded-none"
+                                 className="btn btn-sm border-none bg-ourPrimary text-white rounded-none"
                               >
                                  Fired
                               </button>
@@ -270,7 +250,7 @@ const AllEmployeeList = () => {
                                  onClick={() =>
                                     handleOpenModal(employee?.email)
                                  }
-                                 className="btn btn-sm bg-ourPrimary text-white rounded-none"
+                                 className="btn btn-sm border-transparent bg-ourPrimary text-white rounded-none"
                               >
                                  Fire
                               </button>
@@ -281,6 +261,27 @@ const AllEmployeeList = () => {
                ))}
             </div>
          )}
+
+         <div>
+            <FireModal
+               isOpen={isOpen}
+               handleCloseModal={handleCloseModal}
+               selectedEmail={selectedEmail}
+               refetch={refetch}
+            />
+            <MakeHRModal
+               selectForHR={selectForHR}
+               isHRModalOpen={isHRModalOpen}
+               handleCloseHRModal={handleCloseHRModal}
+               refetch={refetch}
+            />
+            <UpdateSalaryModal
+               isUpdateSalaryModalOpen={isUpdateSalaryModalOpen}
+               selectedForSalaryUpdate={selectedForSalaryUpdate}
+               handleCloseSalaryModal={handleCloseSalaryModal}
+               refetch={refetch}
+            />
+         </div>
       </div>
    );
 };
