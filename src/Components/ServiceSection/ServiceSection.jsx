@@ -5,7 +5,7 @@ import ServiceCard from "./ServiceCard";
 const ServiceSection = () => {
    return (
       <div className="relative max-w-[1170px] mx-auto w-[88%] md:w-[82%]">
-         <Title suptitle={"what we do"} title={`services`} />
+         <Title suptitle={"our"} title={`key features`} />
 
          {/* cards */}
          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

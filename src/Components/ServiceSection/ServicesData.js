@@ -6,39 +6,39 @@ import { HiOutlineChatAlt2 } from "react-icons/hi";
 
 export const ServicesData = [
    {
-      title: "Website Development",
+      title: "User-Specific Dashboards",
       icon: MdComputer,
       description:
-         "Create stunning, user-friendly websites tailored to your business needs.",
+         "Tailored views for Employees, HR, and Admins to manage workflows, salaries, and overall employee management.",
    },
    {
-      title: "SEO Marketing",
+      title: "Work Tracking",
       icon: TfiBarChart,
       description:
-         "Boost your online presence and increase visibility with effective SEO strategies.",
+         "Employees log work hours by task; HR can monitor and filter logs and view summaries.",
    },
    {
-      title: "E-commerce Development",
+      title: "Salary Management",
       icon: GrBasket,
       description:
-         "Build powerful e-commerce platforms to sell your products or services online.",
+         "HR can manage salaries, verify employees, and process payments securely, avoiding duplicate payments.",
    },
    {
-      title: "Graphic Design",
+      title: "Detailed Analytics",
       icon: MdOutlineDesignServices,
       description:
-         "Bring your brand to life with captivating visuals and eye-catching designs.",
+         "Interactive charts for HR to view performance and salary history, aiding data-driven decisions.",
    },
    {
-      title: "Digital Marketing",
+      title: "Admin Controls",
       icon: SlTarget,
       description:
-         "Reach your target audience and drive conversions with targeted digital marketing campaigns.",
+         "Admins can promote employees, adjust salaries, and manage employment with JWT-protected actions.",
    },
    {
-      title: "Social Media Management",
+      title: "Secure Data Management",
       icon: HiOutlineChatAlt2,
       description:
-         "Engage your audience, build brand awareness, and drive growth through effective social media strategies.",
+         "Environment variables protect Firebase config keys and MongoDB credentials, ensuring data privacy.",
    },
 ];

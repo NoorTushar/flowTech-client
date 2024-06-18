@@ -11,18 +11,22 @@ const Slide = ({ bgImg, swiperRef }) => {
          }}
       >
          <div className="hero-overlay bg-opacity-80"></div>
-         <div className="hero-content text-start ">
+         <div className="hero-content text-start mt-[70px]">
             <div className="max-w-3xl">
                <h4 className="text-ourPrimary text-lg mb-2 tracking-[5px] uppercase font-medium">
-                  welcome to flowtech agency
+                  welcome to flowtech
                </h4>
                <h1 className="mb-5 text-[56px] lg:text-[86px] text-white font-semibold text-ourOrange tracking-[3px] md:leading-[60px] uppercase">
-                  digital agency
-                  <br /> <span className="text-stroke">solutions</span>
+                  employee management
+                  <br /> <span className="text-stroke">application</span>
                </h1>
 
                <div className="flex justify-start">
-                  <LinkButton name={"our services"} width="160px"></LinkButton>
+                  <LinkButton
+                     to={"/dashboard"}
+                     name={"View Demo"}
+                     width="160px"
+                  ></LinkButton>
                </div>
                <div className="custom-navigation space-x-4 mt-6">
                   <button

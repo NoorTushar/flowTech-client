@@ -7,41 +7,25 @@ const AboutUs = () => {
          <div className="grid lg:grid-cols-2 gap-6">
             <div>
                <Title suptitle={"welcome"} title={"about flowtech"} />
-               <p className="text-ourAsh leading-[28px] lg:mr-10">
-                  Welcome to FlowTech, your premier digital agency dedicated to
-                  propelling your business into the future. Our expertise spans
-                  across various domains including
-                  <span className="text-ourPrimary"> Website Development </span>
-                  , where we create and maintain bespoke websites tailored to
-                  meet your business needs, and
-                  <span className="text-ourPrimary"> SEO Marketing </span>,
-                  aimed at improving your website`s visibility and ranking on
-                  search engines. <br />
+               <p className="text-ourAsh leading-[28px] lg:mr-10 font-didact">
+                  FlowTech is a comprehensive employee management web
+                  application designed and developed by{" "}
+                  <a
+                     href="https://www.linkedin.com/in/noortushar/"
+                     target="_blank"
+                  >
+                     <span className="text-ourPrimary">Noor Tushar Khan</span>
+                  </a>{" "}
+                  to streamline and enhance workforce management. Its responsive
+                  design ensures seamless functionality across all devices,
+                  including mobile phones, tablets, and desktops, providing a
+                  consistent user experience. <br />
                   <br />
-                  Our
-                  <span className="text-ourPrimary">
-                     {" "}
-                     E-commerce Development{" "}
-                  </span>
-                  services empower businesses to build robust online stores,
-                  ensuring a seamless shopping experience for customers. With
-                  our
-                  <span className="text-ourPrimary"> Graphic Design </span>{" "}
-                  team, we craft visually captivating graphics that perfectly
-                  represent your brand`s identity. In the ever-evolving digital
-                  landscape, our
-                  <span className="text-ourPrimary"> Digital Marketing </span>
-                  strategies help you reach and engage your target audience
-                  effectively, while our{" "}
-                  <span className="text-ourPrimary">
-                     Social Media Management
-                  </span>{" "}
-                  services focus on growing and nurturing your social media
-                  presence.
-                  <br />
-                  <br /> At FlowTech, we are committed to delivering innovative
-                  solutions that drive growth and achieve remarkable results.
-                  Partner with us and let`s create a digital future together.
+                  Built with modern technologies such as React, Node.js,
+                  Express.js, and MongoDB, FlowTech ensures top-notch security,
+                  performance, and user satisfaction. This powerful application
+                  is designed to simplify employee management and boost
+                  productivity across your organization.
                </p>
             </div>
 
@@ -54,7 +38,7 @@ const AboutUs = () => {
                <div className="bg-ourPrimary text-white py-2 px-4 md:py-4 md:px-8 w-max text-center absolute bottom-0 right-16">
                   <h3 className="text-center tracking-[3px] font-light">
                      FLOWTECH <br />
-                     SINCE 2010
+                     by Noor Tushar
                   </h3>
                </div>
             </div>

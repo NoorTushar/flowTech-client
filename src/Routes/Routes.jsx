@@ -16,6 +16,7 @@ import AllMessages from "../Pages/Dashboard/Admin/AllMessages/AllMessages";
 import EmployeeRoute from "./EmployeeRoute";
 import HRRoute from "./HRRoute";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
    {
@@ -115,7 +116,9 @@ export const router = createBrowserRouter([
             path: "all-employee-list",
             element: (
                <PrivateRoute>
-                  <AllEmployeeList />
+                  <AdminRoute>
+                     <AllEmployeeList />
+                  </AdminRoute>
                </PrivateRoute>
             ),
          },
@@ -123,7 +126,9 @@ export const router = createBrowserRouter([
             path: "all-messages",
             element: (
                <PrivateRoute>
-                  <AllMessages />
+                  <AdminRoute>
+                     <AllMessages />
+                  </AdminRoute>
                </PrivateRoute>
             ),
          },
