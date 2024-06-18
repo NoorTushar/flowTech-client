@@ -8,7 +8,7 @@ const ServiceCard = ({ title, description, icon: Icon, index }) => {
             {title}
          </h3>
          <div className="bg-ourAsh h-[0.3px] w-[70px] group-hover:w-full my-3 group-hover:bg-white duration-500"></div>
-         <p className="text-ourAsh leading-[28px] group-hover:text-white duration-300 flex-1">
+         <p className="text-ourAsh leading-[28px] group-hover:text-white duration-300 flex-1 font-didact normal-case">
             {description}
          </p>
          <h5 className="text-3xl text-ourPrimary text-end duration-300 group-hover:text-white">

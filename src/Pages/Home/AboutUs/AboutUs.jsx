@@ -1,5 +1,5 @@
 import Title from "../../../Components/Shared/Title/Title";
-import aboutImg1 from "./a12-about-4.jpg";
+import aboutImg1 from "../../../assets/about-us.jpg";
 
 const AboutUs = () => {
    return (
@@ -7,7 +7,7 @@ const AboutUs = () => {
          <div className="grid lg:grid-cols-2 gap-6">
             <div>
                <Title suptitle={"welcome"} title={"about flowtech"} />
-               <p className="text-ourAsh leading-[28px] lg:mr-10 font-didact">
+               <p className="text-ourAsh leading-[28px] lg:mr-10 font-didact normal-case">
                   FlowTech is a comprehensive employee management web
                   application designed and developed by{" "}
                   <a
@@ -16,16 +16,26 @@ const AboutUs = () => {
                   >
                      <span className="text-ourPrimary">Noor Tushar Khan</span>
                   </a>{" "}
-                  to streamline and enhance workforce management. Its responsive
-                  design ensures seamless functionality across all devices,
-                  including mobile phones, tablets, and desktops, providing a
-                  consistent user experience. <br />
+                  to streamline and enhance workforce management. <br />
                   <br />
-                  Built with modern technologies such as React, Node.js,
-                  Express.js, and MongoDB, FlowTech ensures top-notch security,
-                  performance, and user satisfaction. This powerful application
-                  is designed to simplify employee management and boost
-                  productivity across your organization.
+                  Built with modern technologies such as{" "}
+                  <span className="text-ourPrimary">
+                     React, Node.js, Express.js, and MongoDB
+                  </span>
+                  , FlowTech ensures top-notch security, performance, and user
+                  satisfaction. This powerful application is designed to
+                  simplify employee management and boost productivity across
+                  your organization.
+                  <br />
+                  <br />
+                  FlowTech features{" "}
+                  <span className="text-ourPrimary">
+                     customized dashboards
+                  </span>{" "}
+                  tailored to each user role. Employees can manage their
+                  workflows, HR professionals can handle salary management and
+                  monitor employee work hours, and Admins have full oversight of
+                  the entire workforce.
                </p>
             </div>
 

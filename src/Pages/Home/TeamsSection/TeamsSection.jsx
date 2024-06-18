@@ -9,10 +9,10 @@ const TeamsSection = () => {
                <img
                   alt=""
                   className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full  object-cover"
-                  src="https://i.ibb.co/qJf7b6w/pexels-thisisengineering-3861954.jpg"
+                  src="https://i.ibb.co/QF0DTvy/tushar-pp.jpg"
                />
                <p className="text-xl text-ourPrimary  leading-tight">
-                  Sarah Thompson
+                  Noor Tushar
                </p>
                <p className="text-ourAsh">Chief Executive Officer</p>
             </div>
